@@ -1,0 +1,14 @@
+.special-kills {
+  font-size: .8em;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+.special-kills span {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.special-kills span img {
+  max-width: 45px;
+}

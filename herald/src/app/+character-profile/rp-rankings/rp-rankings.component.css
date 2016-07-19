@@ -1,0 +1,11 @@
+#rankings {
+  font-size: .8em;
+}
+
+.rankings {
+  font-size: 1em;
+  height: 78px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  background-size: cover;
+}
