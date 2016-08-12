@@ -1,0 +1,51 @@
+<div *ngIf="character" class="container">
+  <div class="jumbotron" id="hero">
+    <h2 id="character-name" class="gothic">
+      <span class="red">{{character.name.substr(0, 1)}}</span>{{character.name.substr(1)}}
+    </h2>
+    <h4 *ngIf="character.guildName" id="guild-name">&lt;{{character.guildName}}&gt;</h4>
+  </div>
+
+  <div class="row" id="main-info">
+    <div id="guild-emblem" class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+      <img id="emblem" class="img-responsive img-rounded" alt="guild-emblem"
+      src="https://herald.uthgard.org/Emblem/emblem.php?id={{character.guildEmblemId}}" />
+    </div>
+    <div id="player-avatar" class="banner-images col-xs-6 col-sm-2 col-md-2 col-lg-2">
+      <img id="avatar" class="img-responsive img-rounded" alt="character avatar"
+           src="http://images.uthgard.org/players/{{character.name}}.jpg"/>
+    </div>
+    <div id="header-info" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <h3>Level {{character.level}} • Realm Rank {{character.realmRankFull()}}</h3>
+      <h4>{{character.raceName}} {{character.className}}</h4>
+      <h5>Trades...</h5>
+      <h6>Owner of a houseTier at #houseNumber in Caerwent</h6>
+      <h6>Last seen lastLogin days ago</h6>
+    </div>
+  </div>
+
+  <div id="general-items">
+    <div class="row">
+      <siege-stats [character]="character"></siege-stats>
+      <recently-earned [character]="character"></recently-earned>
+    </div>
+    <div class="container-fluid">
+      <div class="row mod-row">
+        <rvr-kills [character]="character"></rvr-kills>
+        <race-class-kills [character]="character"></race-class-kills>
+        <rp-rankings [character]="character"></rp-rankings>
+      </div>
+      <div class="row mod-row">
+        <progress-node [character]="character"></progress-node>
+        <pve-kills [character]="character"></pve-kills>
+        <tradeskills-node [character]="character"></tradeskills-node>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!character && !error">
+  Loading . . .
+</div>
+<div *ngIf="error">
+  {{error}}.
+</div>
