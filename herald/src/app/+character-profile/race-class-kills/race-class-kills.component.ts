@@ -1,16 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CharacterProfile} from '../shared/character-profile.model';
 
-import 'chartjs';
+const Chart = require('chart.js');
 import {Realm} from '../../shared/realm.enum';
-declare let Chart;
+
 
 @Component({
-  moduleId: module.id,
-  selector: 'race-class-kills',
-  templateUrl: 'race-class-kills.component.html',
+  selector: 'herald-race-class-kills',
+  templateUrl: './race-class-kills.component.html',
   styleUrls: ['../character-profile.component.css',
-    'race-class-kills.component.css']
+    './race-class-kills.component.css']
 })
 export class RaceClassKillsComponent implements OnInit {
   @Input()

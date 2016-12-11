@@ -1,1 +1,1 @@
-export * from './race-class-kills.component';
+export {RaceClassKillsComponent} from './race-class-kills.component';

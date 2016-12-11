@@ -1,1 +1,1 @@
-export * from './progress.component';
+export {ProgressComponent} from './progress.component';

@@ -1,1 +1,1 @@
-export * from './siege-stats.component';
+export {SiegeStatsComponent} from './siege-stats.component';

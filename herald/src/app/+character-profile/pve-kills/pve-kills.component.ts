@@ -1,15 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CharacterProfile} from '../shared/character-profile.model';
 
-import 'chartjs';
-declare let Chart;
+const Chart = require('chart.js');
 
 @Component({
-  moduleId: module.id,
-  selector: 'pve-kills',
-  templateUrl: 'pve-kills.component.html',
+  selector: 'herald-pve-kills',
+  templateUrl: './pve-kills.component.html',
   styleUrls: ['../character-profile.component.css',
-    'pve-kills.component.css']
+    './pve-kills.component.css']
 })
 export class PveKillsComponent implements OnInit {
   @Input()

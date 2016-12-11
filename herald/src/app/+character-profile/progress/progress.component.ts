@@ -1,15 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CharacterProfile} from '../shared/character-profile.model';
 
-import 'chartjs';
-declare let Chart;
+const Chart = require('chart.js');
 
 @Component({
-  moduleId: module.id,
-  selector: 'progress-node',
-  templateUrl: 'progress.component.html',
+  selector: 'herald-progress-node',
+  templateUrl: './progress.component.html',
   styleUrls: ['../character-profile.component.css',
-    'progress.component.css']
+    './progress.component.css']
 })
 export class ProgressComponent implements OnInit {
   @Input()

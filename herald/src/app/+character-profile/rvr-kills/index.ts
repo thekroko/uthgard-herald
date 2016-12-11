@@ -1,1 +1,1 @@
-export * from './rvr-kills.component';
+export {RvrKillsComponent} from './rvr-kills.component';

@@ -1,1 +1,1 @@
-export * from './rp-rankings.component';
+export {RpRankingsComponent} from './rp-rankings.component';
