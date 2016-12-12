@@ -1,1 +1,1 @@
-export * from './tradeskills.component';
+export {TradeskillsComponent} from './tradeskills.component';

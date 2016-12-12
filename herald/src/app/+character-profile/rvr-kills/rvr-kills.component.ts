@@ -1,17 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CharacterProfile} from '../shared/character-profile.model';
 import {Realm} from '../../shared/realm.enum';
-import 'chartjs';
 import {RvrKillStats} from '../shared/rvr-kill-stats.model';
 
-declare let Chart;
+const Chart = require('chart.js');
 
 @Component({
-  moduleId: module.id,
-  selector: 'rvr-kills',
-  templateUrl: 'rvr-kills.component.html',
+  selector: 'herald-rvr-kills',
+  templateUrl: './rvr-kills.component.html',
   styleUrls: ['../character-profile.component.css',
-    'rvr-kills.component.css']
+    './rvr-kills.component.css']
 })
 export class RvrKillsComponent implements OnInit {
   @Input()

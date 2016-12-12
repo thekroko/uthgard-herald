@@ -26,19 +26,19 @@
 
   <div id="general-items">
     <div class="row">
-      <siege-stats [character]="character"></siege-stats>
-      <recently-earned [character]="character"></recently-earned>
+      <herald-siege-stats [character]="character"></herald-siege-stats>
+      <herald-recently-earned [character]="character"></herald-recently-earned>
     </div>
     <div class="container-fluid">
       <div class="row mod-row">
-        <rvr-kills [character]="character"></rvr-kills>
-        <race-class-kills [character]="character"></race-class-kills>
-        <rp-rankings [character]="character"></rp-rankings>
+        <herald-rvr-kills [character]="character"></herald-rvr-kills>
+        <herald-race-class-kills [character]="character"></herald-race-class-kills>
+        <herald-rp-rankings [character]="character"></herald-rp-rankings>
       </div>
       <div class="row mod-row">
-        <progress-node [character]="character"></progress-node>
-        <pve-kills [character]="character"></pve-kills>
-        <tradeskills-node [character]="character"></tradeskills-node>
+        <herald-progress-node [character]="character"></herald-progress-node>
+        <herald-pve-kills [character]="character"></herald-pve-kills>
+        <herald-tradeskills-node [character]="character"></herald-tradeskills-node>
       </div>
     </div>
   </div>

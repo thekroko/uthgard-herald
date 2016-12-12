@@ -2,15 +2,13 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CharacterProfile} from '../shared/character-profile.model';
 
 import * as moment from 'moment';
-import 'chartjs';
-declare let Chart;
+const Chart = require('chart.js');
 
 @Component({
-  moduleId: module.id,
-  selector: 'rp-rankings',
-  templateUrl: 'rp-rankings.component.html',
+  selector: 'herald-rp-rankings',
+  templateUrl: './rp-rankings.component.html',
   styleUrls: ['../character-profile.component.css',
-    'rp-rankings.component.css']
+    './rp-rankings.component.css']
 })
 export class RpRankingsComponent implements OnInit {
   @Input()

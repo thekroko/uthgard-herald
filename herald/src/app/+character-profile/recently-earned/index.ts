@@ -1,1 +1,1 @@
-export * from './recently-earned.component';
+export {RecentlyEarnedComponent} from './recently-earned.component';

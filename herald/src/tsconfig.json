@@ -1,23 +1,28 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "",
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "mapRoot": "/",
-    "module": "commonjs",
+    "inlineSources": true,
+    "lib": [
+      "dom",
+      "es6",
+      "ScriptHost"
+    ],
+    "mapRoot": "./",
+    "module": "es6",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noImplicitAny": false,
-    "outDir": "../dist/",
-    "rootDir": ".",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "../dist/out-tsc",
     "sourceMap": true,
     "target": "es5",
-    "inlineSources": true
-  },
-
-  "files": [
-    "main.ts",
-    "typings.d.ts"
-  ]
+    "typeRoots": [
+      "../node_modules/@types"
+    ]
+  }
 }

@@ -1,11 +1,11 @@
 @font-face {
   font-family: gothic;
-  src: url(fonts/perrygothic.ttf);
+  src: url(assets/fonts/perrygothic.ttf);
 }
 
 body {
   color: rgba(220, 220, 220, 1);
-  background: url(images/stones3.jpg)
+  background: url(assets/images/stones3.jpg)
 }
 
 .hide {

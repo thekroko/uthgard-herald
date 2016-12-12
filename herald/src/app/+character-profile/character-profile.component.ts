@@ -3,29 +3,11 @@ import {ActivatedRoute} from '@angular/router';
 import {CharacterProfileService} from './shared/character-profile.service';
 import {CharacterProfile} from './shared';
 import {ISubscription} from 'rxjs/Subscription';
-import {SiegeStatsComponent} from './siege-stats';
-import {RecentlyEarnedComponent} from './recently-earned';
-import {RvrKillsComponent} from './rvr-kills';
-import {RaceClassKillsComponent} from './race-class-kills';
-import {RpRankingsComponent} from './rp-rankings';
-import {ProgressComponent} from './progress';
-import {PveKillsComponent} from './pve-kills';
-import {TradeskillsComponent} from './tradeskills';
 
 @Component({
-  moduleId: module.id,
-  selector: 'character-profile',
-  templateUrl: 'character-profile.component.html',
-  styleUrls: ['character-profile.component.css'],
-  providers: [CharacterProfileService],
-  directives: [SiegeStatsComponent,
-    RecentlyEarnedComponent,
-    RvrKillsComponent,
-    RaceClassKillsComponent,
-    RpRankingsComponent,
-    ProgressComponent,
-    PveKillsComponent,
-    TradeskillsComponent]
+  selector: 'herald-character-profile',
+  templateUrl: './character-profile.component.html',
+  styleUrls: ['./character-profile.component.css']
 })
 export class CharacterProfileComponent implements OnInit, OnDestroy {
   character: CharacterProfile;
