@@ -4,11 +4,11 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 
 ## Dependencies Setup
 
-Install Node and NPM.
-Download the code.
-Change directory to /herald/
-Run npm install
-Run ng serve
+1. Install Node and NPM.
+2. Download the code.
+3. Change directory to /herald/
+4. Run npm install
+5. Run ng serve
 
 ## URL routes
 * Character profiles: `/character/<name>`
