@@ -6,7 +6,9 @@ import {routing} from './app.routes';
 import {CharacterProfileComponent, ProgressComponent, PveKillsComponent, RaceClassKillsComponent, RecentlyEarnedComponent,
   RpRankingsComponent, RvrKillsComponent, SiegeStatsComponent, TradeskillsComponent
 } from './+character-profile';
+import {GuildProfileComponent} from './+guild-profile/guild-profile.component';
 import {CharacterProfileService} from './+character-profile';
+import {GuildProfileService} from './+guild-profile/shared/guild-profile.service';
 import {HomeComponent} from './+home';
 
 @NgModule({
@@ -21,8 +23,11 @@ import {HomeComponent} from './+home';
     RpRankingsComponent,
     RvrKillsComponent,
     SiegeStatsComponent,
-    TradeskillsComponent],
+    TradeskillsComponent,
+    GuildProfileComponent,
+  ],
   bootstrap: [AppComponent],     // root component
-  providers: [CharacterProfileService]                    // services
+  providers: [CharacterProfileService,
+             GuildProfileService]                    // services
 })
 export class AppModule { }

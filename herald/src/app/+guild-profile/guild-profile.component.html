@@ -1,0 +1,18 @@
+<div *ngIf="guild" class="container">
+  <div class="jumbotron" id="hero">
+    <h2 id="character-name" class="gothic">
+      <span class="red">{{guild.name.substr(0, 1)}}</span>{{guild.name.substr(1)}}
+    </h2>
+  </div>
+
+  <div class="row" id="main-info">
+  </div>
+
+  <div id="general-items">
+</div>
+<div *ngIf="!character && !error">
+  Loading . . .
+</div>
+<div *ngIf="error">
+  {{error}}.
+</div>
