@@ -2,6 +2,14 @@
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.10.
 
+## Dependencies Setup
+
+1. Install Node and NPM.
+2. Download the code.
+3. Change directory to /herald/
+4. Run npm install
+5. Run ng serve
+
 ## URL routes
 * Character profiles: `/character/<name>`
     * Test examples: `/character/Burfo`, `/character/Testchar`
