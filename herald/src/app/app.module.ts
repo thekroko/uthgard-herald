@@ -27,7 +27,8 @@ import {HomeComponent} from './+home';
     GuildProfileComponent,
   ],
   bootstrap: [AppComponent],     // root component
-  providers: [CharacterProfileService,
-             GuildProfileService]                    // services
+  providers: [CharacterProfileService,// services
+    GuildProfileService,
+  ]
 })
 export class AppModule { }
