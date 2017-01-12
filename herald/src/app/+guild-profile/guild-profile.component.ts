@@ -21,7 +21,9 @@ export class GuildProfileComponent implements OnInit{
   ngOnInit(){
     this.sub = this.route.params.subscribe(params => {
     this.guildProfileService.getGuildProfile(params['name'])
-        .then(g => this.guild = g);
+        .subscribe((guildProfile: GuildProfile) => {
+            this.guild = guildProfile;
+        });
     });
   }
 }

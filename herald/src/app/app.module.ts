@@ -1,5 +1,6 @@
 import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {HttpModule} from '@angular/http';
 
 import { AppComponent }  from './app.component';
 import {routing} from './app.routes';
@@ -12,7 +13,7 @@ import {GuildProfileService} from './+guild-profile/shared/guild-profile.service
 import {HomeComponent} from './+home';
 
 @NgModule({
-  imports: [BrowserModule, routing],       // module dependencies
+  imports: [BrowserModule, routing, HttpModule],       // module dependencies
   declarations: [AppComponent,    // components and directives
     CharacterProfileComponent,
     HomeComponent,

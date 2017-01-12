@@ -12,5 +12,5 @@ constructor(public name: string,
             public guildRealmPoints: number,
             public players: string[],
             public realm: string){
-    }
+            }
 }
