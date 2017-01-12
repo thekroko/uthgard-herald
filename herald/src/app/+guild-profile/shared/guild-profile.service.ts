@@ -1,18 +1,46 @@
 import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
 import {GuildProfile} from './guild.model';
-import {mockGuildProfiles} from './mock-guild-profiles';
+//import {mockGuildProfiles} from './mock-guild-profiles';
+
+import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class GuildProfileService {
+
+  constructor(private http: Http){}
+
+
 
   /**
    * Gets the GuildProfile of a character
    * @param name The guild's name to look up
    * @returns {Promise<GuildProfile>}
    */
-  getGuildProfile(name: string): Promise<GuildProfile> {
+  getGuildProfile(name: string): Observable<GuildProfile>{
     //todo hook into real API once it exists
-    return this.getGuildFromMockDataWithDelay(name, 100);
+    return this.getGuildProfileFromFile(name);
+  }
+
+  private getGuildProfileFromFile(name: string){
+    return this.http.get('/data/guild-data.json')
+                    .map((res) => {
+                      let data = JSON.parse(res.text());
+                      let foundGuild = data.find((guild => {
+                        return name === guild.name;
+                      }));
+                      //TODO: implement error handling
+                      return new GuildProfile(
+                        foundGuild.name,
+                        foundGuild.contact,
+                        foundGuild.website, 
+                        foundGuild.guildHouse,
+                        foundGuild.guildRealmPoints,
+                        foundGuild.players,
+                        foundGuild.realm,
+                      );
+                    });
   }
 
   /*
@@ -25,6 +53,7 @@ export class GuildProfileService {
    * @param name The guild's name to look up
    * @returns {Promise<GuildProfile>}
    */
+/*
   private getGuildFromMockData(name: string): Promise<GuildProfile> {
     return new Promise<GuildProfile>(function (fulfill, reject) {
       let guild = mockGuildProfiles.find(g => g.name === name);
@@ -35,6 +64,7 @@ export class GuildProfileService {
       }
     });
   }
+*/
 
   /**
    * A test function which looks up guild from mock-guild-profiles.ts
@@ -42,9 +72,11 @@ export class GuildProfileService {
    * @param delayMS The delay in milliseconds to be artificially applied
    * @returns {Promise<GuildProfile>}
    */
+/*
   private getGuildFromMockDataWithDelay(name: string, delayMS: number): Promise<GuildProfile> {
     return new Promise<GuildProfile>(resolve => setTimeout(() =>
       resolve(this.getGuildFromMockData(name)), delayMS));
   }
+*/
 
 }

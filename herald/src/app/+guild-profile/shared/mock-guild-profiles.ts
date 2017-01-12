@@ -1,4 +1,4 @@
-import {GuildProfile} from './guild.model';
+//import {GuildProfile} from './guild.model';
 
 
 /*
@@ -11,5 +11,5 @@ constructor(public name: string,
 */
 
 export const mockGuildProfiles = [
-new GuildProfile('test'),
+// new GuildProfile('test'),
 ];
