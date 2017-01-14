@@ -13,7 +13,7 @@ import {GuildProfile} from './shared/guild.model';
 })
 export class GuildProfileComponent implements OnInit{
   sub: ISubscription;
-  guild: GuildProfile;
+  guild: any;
 
   constructor(private route: ActivatedRoute, private guildProfileService: GuildProfileService) {
   }
@@ -22,8 +22,11 @@ export class GuildProfileComponent implements OnInit{
     this.sub = this.route.params.subscribe(params => {
     this.guildProfileService.getGuildProfile(params['name'])
         .subscribe((guildProfile: GuildProfile) => {
-            this.guild = guildProfile;
-        });
+                this.guild = guildProfile;
+            },(error) => {
+                console.log(error);
+                this.guild = false;
+            });
     });
   }
 }
