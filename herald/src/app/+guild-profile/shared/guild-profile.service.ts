@@ -34,14 +34,16 @@ export class GuildProfileService {
                       let data = JSON.parse(res.text());
                       let foundGuild = data;
 
+                      console.log(data);
+
                       return new GuildProfile(
                         foundGuild.name,
-                        foundGuild.contact,
-                        foundGuild.website, 
+                        foundGuild.guildContact,
+                        foundGuild.guildWebsite, 
                         foundGuild.guildHouse,
                         foundGuild.guildRealmPoints,
                         foundGuild.players,
-                        foundGuild.realm,
+                        foundGuild.guildRealm,
                       );
                     });
   }
