@@ -11,8 +11,6 @@ export class GuildProfileService {
 
   constructor(private http: Http){}
 
-
-
   /**
    * Gets the GuildProfile of a character
    * @param name The guild's name to look up
@@ -30,6 +28,11 @@ export class GuildProfileService {
                       let foundGuild = data.find((guild => {
                         return name === guild.name;
                       }));
+
+                      if (!foundGuild){
+                        throw new Error('Guild not found');
+                      }
+
                       //TODO: implement error handling
                       return new GuildProfile(
                         foundGuild.name,
