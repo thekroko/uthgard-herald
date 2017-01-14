@@ -3,9 +3,20 @@
     <h2 id="character-name" class="gothic">
       <span class="red">{{guild.name.substr(0, 1)}}</span>{{guild.name.substr(1)}}
     </h2>
+    <h4>{{guild.realm}}</h4>
   </div>
 
   <div class="row" id="main-info">
+    <div id="guild-emblem" class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+    </div>
+    <div id="player-avatar" class="banner-images col-xs-6 col-sm-2 col-md-2 col-lg-2">
+    </div>
+    <div id="header-info" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <p *ngIf="guild.contact"><span class="item-label">Guild contact: </span><span class="item-value">{{ guild.contact }}</span></p>
+            <p *ngIf="guild.website"><span class="item-label">Guild website: </span><span class="item-value">{{ guild.website }}</span></p>
+            <p *ngIf="guild.guildRealmPoints"><span class="item-label">Realm points: </span><span class="item-value">{{ guild.guildRealmPoints | number }}</span></p>
+            <p *ngIf="guild.guildHouse && guild.guildHouse !== 'None'"><span class="item-label">Guild house: </span><span class="item-value"> {{ guild.guildHouse }}</span></p>
+    </div>
   </div>
 
   <div id="general-items">
@@ -14,5 +25,5 @@
   Loading . . .
 </div>
 <div *ngIf="error">
-  {{error}}.
+  {{error}}
 </div>
