@@ -38,4 +38,5 @@ Thumbs.db
 *.swo
 
 # data files
-/src/data/*.json
+/src/data/**/*.json
+/data/**/*.json
