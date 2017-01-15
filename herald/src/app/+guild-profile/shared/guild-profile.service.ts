@@ -23,8 +23,7 @@ export class GuildProfileService {
 
   private getGuildProfileFromFile(name: string){
     let fileName = name.replace(/ /g, "-");
-    console.log(`fileName: ${fileName}`);
-    return this.http.get(`/data/guilds/${fileName}.json`)
+    return this.http.get(`/assets/data/guilds/${fileName}.json`)
                     .map((res) => {
 
                       if (res.status !== 200){

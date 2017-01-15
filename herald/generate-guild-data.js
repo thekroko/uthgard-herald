@@ -4,6 +4,8 @@ const fs = require('fs');
 
 const GUILD_COUNT= process.argv[2] || 1;
 
+const BASE_DIR = './src/assets/data/';
+
 function getRandomArrayItem(arrayIn){
     return arrayIn[Math.floor(Math.random() * arrayIn.length)];
 }
@@ -35,6 +37,18 @@ let namesSeconds = [
 let guilds = [];
 let guildNames = [];
 
+//we want one guild that will always be available
+guilds.push({
+    name: 'Test Guild',
+    guildHouse: 'Lot 1',
+    guildRealmPoints: '1000000',
+    guildRealm: 'Albion',
+    guildWebsite: 'www.google.co.uk',
+    guildContact: 'test@test.com',
+});
+
+guildNames.push('Test Guild');
+
 for (let i=0; i<GUILD_COUNT; i++){
     
     let guildName = getGuildName();
@@ -61,12 +75,12 @@ for (let i=0; i<GUILD_COUNT; i++){
 //write each guild to a file
 for (let i=0; i<guilds.length; i++){
     let currGuild = guilds[i];
-    fs.writeFile(`./guilds/${currGuild.name.replace(/ /g, '-')}.json`, JSON.stringify(currGuild), function(err){
+    fs.writeFile(`${BASE_DIR}guilds/${currGuild.name.replace(/ /g, '-')}.json`, JSON.stringify(currGuild), function(err){
         if (err) console.log(err); 
     });
 }
 
 //write the file for all guild names
-fs.writeFile(`./guilds.json`, JSON.stringify(guildNames), function(err){
+fs.writeFile(`${BASE_DIR}guilds.json`, JSON.stringify(guildNames), function(err){
     if (err) console.log(err);
 });

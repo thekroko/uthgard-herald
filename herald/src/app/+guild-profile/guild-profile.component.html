@@ -9,8 +9,10 @@
   <div class="row" id="main-info">
     <div id="guild-emblem" class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
     </div>
+
     <div id="player-avatar" class="banner-images col-xs-6 col-sm-2 col-md-2 col-lg-2">
     </div>
+
     <div id="header-info" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <p *ngIf="guild.contact"><span class="item-label">Guild contact: </span><span class="item-value">{{ guild.contact }}</span></p>
             <p *ngIf="guild.website"><span class="item-label">Guild website: </span><span class="item-value">{{ guild.website }}</span></p>
@@ -20,10 +22,16 @@
   </div>
 
   <div id="general-items">
-</div>
-<div *ngIf="!guild && guild !== false">
-  Loading . . .
-</div>
-<div *ngIf="error">
-  {{error}}
+  </div>
+
+
+  <div *ngIf="!guild && guild !== false">
+    Loading . . .
+  </div>
+
+
+  <div *ngIf="error">
+    {{error}}
+  </div>
+
 </div>

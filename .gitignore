@@ -38,11 +38,6 @@ Thumbs.db
 *.swo
 
 # data files
-<<<<<<< HEAD:.gitignore
 herald/src/data/**/*.json
 src/data/**/*.json
 data/**/*.json
-=======
-/src/data/**/*.json
-/data/**/*.json
->>>>>>> 86a1b5b1d974d799e4e657fb9525d2933d5e596d:herald/.gitignore
