@@ -1,10 +1,26 @@
 "use strict"
 
 const fs = require('fs');
+const path = require('path');
 
 const GUILD_COUNT= process.argv[2] || 1;
 
 const BASE_DIR = './src/assets/data/';
+
+fs.isDir = function(dpath) {
+    try {
+        return fs.lstatSync(dpath).isDirectory();
+    } catch(e) {
+        return false;
+    }
+};
+fs.mkdirp = function(dirname) {
+    dirname = path.normalize(dirname).split(path.sep);
+    dirname.forEach((sdir,index)=>{
+        var pathInQuestion = dirname.slice(0,index+1).join(path.sep);
+        if((!fs.isDir(pathInQuestion)) && pathInQuestion) fs.mkdirSync(pathInQuestion);
+    });
+};
 
 function getRandomArrayItem(arrayIn){
     return arrayIn[Math.floor(Math.random() * arrayIn.length)];
@@ -71,6 +87,10 @@ for (let i=0; i<GUILD_COUNT; i++){
         guildContact: guildContact,
     });
 }
+
+//ensure we have the correct directories
+fs.mkdirp(`${BASE_DIR}`);
+fs.mkdirp(`${BASE_DIR}guilds`);
 
 //write each guild to a file
 for (let i=0; i<guilds.length; i++){
