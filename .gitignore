@@ -36,3 +36,8 @@ Thumbs.db
 # swap files
 *.swp
 *.swo
+
+# data files
+herald/src/assets/data/**/*.json
+src/assets/data/**/*.json
+assets/data/**/*.json

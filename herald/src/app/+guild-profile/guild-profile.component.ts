@@ -14,6 +14,7 @@ import {GuildProfile} from './shared/guild.model';
 export class GuildProfileComponent implements OnInit{
   sub: ISubscription;
   guild: GuildProfile;
+  error: string;
 
   constructor(private route: ActivatedRoute, private guildProfileService: GuildProfileService) {
   }
@@ -21,7 +22,12 @@ export class GuildProfileComponent implements OnInit{
   ngOnInit(){
     this.sub = this.route.params.subscribe(params => {
     this.guildProfileService.getGuildProfile(params['name'])
-        .then(g => this.guild = g);
+        .subscribe((guildProfile: GuildProfile) => {
+                this.guild = guildProfile;
+                console.log(this.guild);
+            },(error) => {
+                this.error = error;
+            });
     });
   }
 }
