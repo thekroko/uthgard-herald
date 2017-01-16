@@ -1,0 +1,29 @@
+h2 {
+    color: red;
+}
+
+.gothic {
+  font-family: 'gothic', sans-serif;
+  color: #ffba00;
+}
+
+#hero {
+  background: url(assets/images/apk.jpg);
+  color: white;
+  padding-left: 35%;
+  padding-bottom: 1%;
+  margin-bottom: 0;
+}
+
+#hero h3 {
+  margin-top: 0;
+}
+
+#character-name {
+  color: white;
+}
+
+.item-label {
+    font-weight: bold;
+    width: 200px;
+}

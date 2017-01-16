@@ -32,3 +32,15 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+<<<<<<< HEAD:herald/.gitignore
+=======
+
+# swap files
+*.swp
+*.swo
+
+# data files
+herald/src/assets/data/**/*.json
+src/assets/data/**/*.json
+assets/data/**/*.json
+>>>>>>> a983c4f72e447ec7c8852d92a749f7c13708c9a7:.gitignore

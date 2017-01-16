@@ -1,5 +1,6 @@
 import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {HttpModule} from '@angular/http';
 
 import { AppComponent }  from './app.component';
 import {routing} from './app.routes';
@@ -10,7 +11,7 @@ import {CharacterProfileService} from './+character-profile';
 import {HomeComponent} from './+home';
 
 @NgModule({
-  imports: [BrowserModule, routing],       // module dependencies
+  imports: [BrowserModule, routing, HttpModule],       // module dependencies
   declarations: [AppComponent,    // components and directives
     CharacterProfileComponent,
     HomeComponent,
@@ -23,6 +24,12 @@ import {HomeComponent} from './+home';
     SiegeStatsComponent,
     TradeskillsComponent],
   bootstrap: [AppComponent],     // root component
+<<<<<<< HEAD
   providers: [CharacterProfileService]                    // services
+=======
+  providers: [CharacterProfileService,// services
+    GuildProfileService,
+  ]
+>>>>>>> a983c4f72e447ec7c8852d92a749f7c13708c9a7
 })
 export class AppModule { }
