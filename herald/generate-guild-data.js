@@ -5,7 +5,7 @@ const path = require('path');
 
 const GUILD_COUNT= process.argv[2] || 1;
 
-const BASE_DIR = './src/assets/data/';
+const BASE_DIR = path.resolve(__dirname, './src/assets/data/');
 
 fs.isDir = function(dpath) {
     try {
@@ -90,17 +90,29 @@ for (let i=0; i<GUILD_COUNT; i++){
 
 //ensure we have the correct directories
 fs.mkdirp(`${BASE_DIR}`);
+<<<<<<< HEAD
 fs.mkdirp(`${BASE_DIR}guilds`);
+=======
+fs.mkdirp(`${BASE_DIR}/guilds`);
+>>>>>>> a983c4f72e447ec7c8852d92a749f7c13708c9a7
 
 //write each guild to a file
 for (let i=0; i<guilds.length; i++){
     let currGuild = guilds[i];
+<<<<<<< HEAD
     fs.writeFile(`${BASE_DIR}guilds/${currGuild.name.replace(/ /g, '-')}.json`, JSON.stringify(currGuild), function(err){
+=======
+    fs.writeFile(`${BASE_DIR}/guilds/${currGuild.name.replace(/ /g, '-')}.json`, JSON.stringify(currGuild), function(err){
+>>>>>>> a983c4f72e447ec7c8852d92a749f7c13708c9a7
         if (err) console.log(err); 
     });
 }
 
 //write the file for all guild names
+<<<<<<< HEAD
 fs.writeFile(`${BASE_DIR}guilds.json`, JSON.stringify(guildNames), function(err){
+=======
+fs.writeFile(`${BASE_DIR}/guilds.json`, JSON.stringify(guildNames), function(err){
+>>>>>>> a983c4f72e447ec7c8852d92a749f7c13708c9a7
     if (err) console.log(err);
 });

@@ -7,7 +7,7 @@
     "start": "./node_modules/.bin/ng serve",
     "lint": "./node_modules/.bin/tslint \"src/**/*.ts\"",
     "test": "./node_modules/.bin/ng test",
-    "build": "./node_modules/.bin/ng build",
+    "build": "node ./generate-guild-data.js || ./node_modules/.bin/ng build",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
     "docker:run:nginx": "docker run --name uthgard-nginx -v $(pwd)/../nginx/conf.d:/etc/nginx/conf.d:ro -v $(pwd)/dist:/usr/share/nginx/html:ro -d -p 8181:80 nginx",
