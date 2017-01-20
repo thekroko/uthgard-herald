@@ -168,7 +168,7 @@ for (let i = 0; i < PLAYER_COUNT; i++){
 
 //ensure that the directories exist
 fs.mkdirp(`${BASE_DIR}`);
-fs.mkdirp(`${BASE_DIR}/players`);
+fs.mkdirp(`${BASE_DIR}players`);
 
 for (let i = 0; i < players.length; i++){
     let currPlayer = players[i];
@@ -179,7 +179,7 @@ for (let i = 0; i < players.length; i++){
     });
 }
 
-fs.writeFile(`${BASE_DIR}/players.json`, JSON.stringify(playerNames), function(err){
+fs.writeFile(`${BASE_DIR}players.json`, JSON.stringify(playerNames), function(err){
     if (err) console.log(err);
 });
 
