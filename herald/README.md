@@ -4,7 +4,7 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 
 ## Dependencies Setup
 
-1. Install NodeJS(v7.x or higher) and NPM.
+1. Install Node and NPM.
 2. Download the code.
 3. Change directory to /herald/
 4. Run npm install
