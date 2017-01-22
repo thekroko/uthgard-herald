@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const GUILD_COUNT= process.argv[2] || 1;
+
 const BASE_DIR = path.resolve(__dirname, './src/assets/data/');
 
 fs.isDir = function(dpath) {

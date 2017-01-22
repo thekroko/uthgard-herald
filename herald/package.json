@@ -4,14 +4,18 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
+<<<<<<< HEAD
+    "start": "ng serve",
+    "lint": "tslint \"src/**/*.ts\"",
+    "test": "ng test",
+=======
     "start": "./node_modules/.bin/ng serve",
     "lint": "./node_modules/.bin/tslint \"src/**/*.ts\"",
     "test": "./node_modules/.bin/ng test",
     "build": "node ./generate-guild-data.js || ./node_modules/.bin/ng build",
+>>>>>>> a983c4f72e447ec7c8852d92a749f7c13708c9a7
     "pree2e": "webdriver-manager update",
-    "e2e": "protractor",
-    "docker:run:nginx": "docker run --name uthgard-nginx -v $(pwd)/../nginx/conf.d:/etc/nginx/conf.d:ro -v $(pwd)/dist:/usr/share/nginx/html:ro -d -p 8181:80 nginx",
-    "docker:build:nginx": "docker build -t uthgard-nginx $(pwd)/.."
+    "e2e": "protractor"
   },
   "private": true,
   "dependencies": {
