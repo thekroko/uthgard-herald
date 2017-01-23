@@ -104,7 +104,6 @@ let hibernia =
         'Firbolg',
         'Elf',
         'Lurikeen',
-        'Inconnu',
         'Valkyn',
         'Sylvan',
     ],
@@ -143,6 +142,11 @@ let realms = {
 
 let players = [];
 let playerNames = [];
+let playersByRealm = {
+    albion: [],
+    midgard: [],
+    hibernia: [],
+};
 
 for (let i = 0; i < PLAYER_COUNT; i++){
 
@@ -171,6 +175,7 @@ for (let i = 0; i < PLAYER_COUNT; i++){
     };
 
     players.push(generatedPlayer);
+    playersByRealm[currRealmName].push(playerName);
     playerNames.push(playerName);
 }
 
@@ -191,8 +196,19 @@ fs.writeFile(`${BASE_DIR}/players.json`, JSON.stringify(playerNames), function(e
     if (err) console.log(err);
 });
 
+fs.writeFile(`${BASE_DIR}/alb_players.json`, JSON.stringify(playersByRealm['albion']), function(err){
+    if (err) console.log(err);
+});
 
-console.dir(players);
+fs.writeFile(`${BASE_DIR}/mid_players.json`, JSON.stringify(playersByRealm['midgard']), function(err){
+    if (err) console.log(err);
+});
+fs.writeFile(`${BASE_DIR}/hib_players.json`, JSON.stringify(playersByRealm['hibernia']), function(err){
+    if (err) console.log(err);
+});
+
+
+console.dir(playersByRealm);
 
 
 
