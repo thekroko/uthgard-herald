@@ -133,14 +133,21 @@ let hibernia =
     ],
 }
 
-let realms = [albion, midgard, hibernia];
+//let realms = [albion, midgard, hibernia];
+
+let realms = {
+    albion: albion,
+    midgard: midgard,
+    hibernia: hibernia,
+}
 
 let players = [];
 let playerNames = [];
 
 for (let i = 0; i < PLAYER_COUNT; i++){
 
-    let currRealm = getRandomArrayItem(realms);
+    let currRealmName = getRandomArrayItem(Object.keys(realms));
+    let currRealm = realms[currRealmName];
     
     let playerName = getPlayerName();
     let playerLevel = Math.ceil(Math.random() * 50);
@@ -159,7 +166,8 @@ for (let i = 0; i < PLAYER_COUNT; i++){
         level: playerLevel,
         xpPercent: xpPercent,
         rpPercent: rpPercent, 
-        realmRank: Math.random() * 10 //TODO: what should this be
+        realmRank: Math.random() * 10, //TODO: what should this be
+        realm: currRealmName,
     };
 
     players.push(generatedPlayer);
@@ -182,6 +190,7 @@ for (let i = 0; i < players.length; i++){
 fs.writeFile(`${BASE_DIR}/players.json`, JSON.stringify(playerNames), function(err){
     if (err) console.log(err);
 });
+
 
 console.dir(players);
 
