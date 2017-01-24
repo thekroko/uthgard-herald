@@ -148,6 +148,20 @@ let playersByRealm = {
     hibernia: [],
 };
 
+//we want a player to always be present
+players.push({
+        fullName: "Testplayer",
+        raceName: "briton",
+        className: "cleric",
+        level: 10,
+        xpPercent: 1,
+        rpPercent: 1,
+        realmRank: 1,
+        realm: 'albion',
+});
+
+let playerNames.push('Testplayer');
+
 for (let i = 0; i < PLAYER_COUNT; i++){
 
     let currRealmName = getRandomArrayItem(Object.keys(realms));

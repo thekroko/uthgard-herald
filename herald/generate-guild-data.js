@@ -6,6 +6,16 @@ const path = require('path');
 const GUILD_COUNT= process.argv[2] || 1;
 const BASE_DIR = path.resolve(__dirname, './src/assets/data/');
 
+const albPlayers = require('./src/assets/data/alb_players.json');
+const midPlayers = require('./src/assets/data/mid_players.json');
+const hibPlayers = require('./src/assets/data/hib_players.json');
+
+const realmPlayers = {
+    albion: albPlayers,
+    midgard: midPlayers,
+    hibernia: hibPlayers,
+};
+
 fs.isDir = function(dpath) {
     try {
         return fs.lstatSync(dpath).isDirectory();
@@ -69,11 +79,19 @@ for (let i=0; i<GUILD_COUNT; i++){
     let guildName = getGuildName();
     let guildHouse = Math.random() > 0.4 ? "None" : `Lot ${Math.floor(Math.random() * 150)+1}`;
     let guildRealmPoints = Math.floor(Math.random() * 100000000000); //TODO: is this right?
-    let guildRealm = ['Albion', 'Hibernia', 'Midgard'][Math.floor(Math.random()*3)];
+    let guildRealm = ['albion', 'hibernia', 'midgard'][Math.floor(Math.random()*3)];
     let guildWebsite = '';
     let guildContact = '';
 
-    let guildPlayers = [];//TODO: add this
+    let currRealmPlayers = realmPlayers[guildRealm];
+    let guildPlayers = [];
+
+    let playerCount = Math.floor(Math.random() * currRealmPlayers.length);
+
+    for (let j=0; j<playerCount; j++){
+        let selectedPlayer = getRandomArrayItem(currRealmPlayers);
+        guildPlayers.push(selectedPlayer);
+    }
 
     guildNames.push(guildName);
 
@@ -84,6 +102,7 @@ for (let i=0; i<GUILD_COUNT; i++){
         guildRealm: guildRealm,
         guildWebsite: guildWebsite,
         guildContact: guildContact,
+        players: guildPlayers,
     });
 }
 
