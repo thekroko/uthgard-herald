@@ -160,7 +160,7 @@ players.push({
         realm: 'albion',
 });
 
-let playerNames.push('Testplayer');
+playerNames.push('Testplayer');
 
 for (let i = 0; i < PLAYER_COUNT; i++){
 
