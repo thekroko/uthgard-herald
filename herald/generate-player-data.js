@@ -104,7 +104,6 @@ let hibernia =
         'Firbolg',
         'Elf',
         'Lurikeen',
-        'Inconnu',
         'Valkyn',
         'Sylvan',
     ],
@@ -133,14 +132,40 @@ let hibernia =
     ],
 }
 
-let realms = [albion, midgard, hibernia];
+//let realms = [albion, midgard, hibernia];
+
+let realms = {
+    albion: albion,
+    midgard: midgard,
+    hibernia: hibernia,
+}
 
 let players = [];
 let playerNames = [];
+let playersByRealm = {
+    albion: [],
+    midgard: [],
+    hibernia: [],
+};
+
+//we want a player to always be present
+players.push({
+        fullName: "Testplayer",
+        raceName: "briton",
+        className: "cleric",
+        level: 10,
+        xpPercent: 1,
+        rpPercent: 1,
+        realmRank: 1,
+        realm: 'albion',
+});
+
+playerNames.push('Testplayer');
 
 for (let i = 0; i < PLAYER_COUNT; i++){
 
-    let currRealm = getRandomArrayItem(realms);
+    let currRealmName = getRandomArrayItem(Object.keys(realms));
+    let currRealm = realms[currRealmName];
     
     let playerName = getPlayerName();
     let playerLevel = Math.ceil(Math.random() * 50);
@@ -159,10 +184,12 @@ for (let i = 0; i < PLAYER_COUNT; i++){
         level: playerLevel,
         xpPercent: xpPercent,
         rpPercent: rpPercent, 
-        realmRank: Math.random() * 10 //TODO: what should this be
+        realmRank: Math.random() * 10, //TODO: what should this be
+        realm: currRealmName,
     };
 
     players.push(generatedPlayer);
+    playersByRealm[currRealmName].push(playerName);
     playerNames.push(playerName);
 }
 
@@ -183,7 +210,19 @@ fs.writeFile(`${BASE_DIR}/players.json`, JSON.stringify(playerNames), function(e
     if (err) console.log(err);
 });
 
-console.dir(players);
+fs.writeFile(`${BASE_DIR}/alb_players.json`, JSON.stringify(playersByRealm['albion']), function(err){
+    if (err) console.log(err);
+});
+
+fs.writeFile(`${BASE_DIR}/mid_players.json`, JSON.stringify(playersByRealm['midgard']), function(err){
+    if (err) console.log(err);
+});
+fs.writeFile(`${BASE_DIR}/hib_players.json`, JSON.stringify(playersByRealm['hibernia']), function(err){
+    if (err) console.log(err);
+});
+
+
+console.dir(playersByRealm);
 
 
 
