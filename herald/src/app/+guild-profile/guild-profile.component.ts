@@ -6,6 +6,8 @@ import {ISubscription} from 'rxjs/Subscription';
 import {GuildProfileService} from './shared/guild-profile.service';
 import {GuildProfile} from './shared/guild.model';
 
+import {PlayerDataStore} from '../shared/player-data/player-data-store.component';
+
 @Component({
   selector: 'herald-guild-profile',
   templateUrl: './guild-profile.component.html',
@@ -16,7 +18,9 @@ export class GuildProfileComponent implements OnInit{
   guild: GuildProfile;
   error: string;
 
-  constructor(private route: ActivatedRoute, private guildProfileService: GuildProfileService) {
+  constructor(private route: ActivatedRoute,
+              private guildProfileService: GuildProfileService,
+              private playerDataStore: PlayerDataStore) {
   }
 
   ngOnInit(){
@@ -25,6 +29,7 @@ export class GuildProfileComponent implements OnInit{
         .subscribe((guildProfile: GuildProfile) => {
                 this.guild = guildProfile;
                 console.log(this.guild);
+                this.playerDataStore.addPlayers(this.guild.players);
             },(error) => {
                 this.error = error;
             });
