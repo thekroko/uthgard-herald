@@ -39,7 +39,8 @@ export class GuildProfileComponent implements OnInit{
                     .then((data) => {
                         console.log('loaded data:');
                         console.dir(data);
-                        this.playerDataStore.sortPlayersForValue('level');
+                        this.playerDataStore.sortPlayersForValue('level')
+                            .then(data => {console.dir(data)});
                     })
                     .catch(err => {
                         console.log(err);

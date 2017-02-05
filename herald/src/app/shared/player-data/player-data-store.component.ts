@@ -40,29 +40,35 @@ export class PlayerDataStore{
     
     //sets a sorted list of player names according the the value key provided
     sortPlayersForValue(valueKey: string){
-        let sortedPlayers = [];
+        return new Promise(resolve => {
+            let sortedPlayers = [];
+            let loadedCount = 0;
 
-        for (let i = 0; i < this.playerNames['unsorted'].length; i++){
-            let currPlayer = this.playerNames['unsorted'][i];
-            this.getPlayerData(currPlayer)
-                .subscribe(data => {
+            for (let i = 0; i < this.playerNames['unsorted'].length; i++){
+                let currPlayer = this.playerNames['unsorted'][i];
+                this.getPlayerData(currPlayer)
+                    .subscribe(data => {
 
-                    if(data[valueKey]) {
-                        //if (!this.playerNames[valueKey]) this.playerNames[valueKey] = []; //we want to ensure there is an array for this key
-                        var i;
-                        for (i=0; i<sortedPlayers.length && data[valueKey] > sortedPlayers[i][valueKey]; i++){
+                        if(data[valueKey]) {
+                            this.currentColumnSort = valueKey;
+                            var i;
+                            for (i=0; i<sortedPlayers.length && data[valueKey] > sortedPlayers[i][valueKey]; i++){}
+
+                            sortedPlayers.splice(Math.max(i, 0), 0, data);
+                            this.playerNames[valueKey] = sortedPlayers.map(p => p.fullName);
+
+                            loadedCount++;
+
+                            if (loadedCount >= this.playerNames['unsorted'].length){
+                                resolve(this.playerNames[valueKey]);
+                            }
+                        } else {
+                            throw new Error(`Player cannot be sorted on ${valueKey}`);
                         }
-                        sortedPlayers.splice(Math.max(i, 0), 0, data);
-                        this.playerNames[valueKey] = sortedPlayers.map(p => p.fullName);
-                        this.testLogPlayerNamesKey(valueKey);
-                        console.dir(this.playerNames);
-                    } else {
-                        throw new Error(`Player cannot be sorted on ${valueKey}`);
-                    }
 
-                }); 
-        }    
-
+                    }); 
+            }    
+        });
     }
 
     //loads a player and adds it to the list of playerData
@@ -94,6 +100,8 @@ export class PlayerDataStore{
 
             let data = JSON.parse(res.text());
             let foundPlayer = data;
+
+            //TODO: should this also add the player data?
 
             return new SmallPlayerData(
                       foundPlayer.fullName,
