@@ -12,6 +12,16 @@ export class PlayerDataStore{
         this.playerNames['unsorted'] = []; 
         this.playerNames['alpha'] = []; //to ensure we always have an alpha sorted list
     }
+
+    //returns players from the current sort between the values specified
+    getPlayerRange(startIndex: number, endIndex: number){
+       let selectedPlayers = this.playerNames[this.currentColumnSort].slice(startIndex, endIndex); 
+       let returnData = [];
+       for (let i = 0; i < selectedPlayers.length; i++){
+            returnData.push(this.playerData[selectedPlayers[i]]);
+       }
+       return returnData;
+    }
     
     //adds a player name
     addPlayerName(playerName: string){
@@ -103,7 +113,7 @@ export class PlayerDataStore{
 
             //TODO: should this also add the player data?
 
-            return new SmallPlayerData(
+            let newPlayer = new SmallPlayerData(
                       foundPlayer.fullName,
                       foundPlayer.raceName,
                       foundPlayer.className,
@@ -113,6 +123,11 @@ export class PlayerDataStore{
                       foundPlayer.realmRank,
                       foundPlayer.realm,
                    );
+
+
+            this.playerData[playerName] = newPlayer;
+            
+            return newPlayer;
         });
      }
 
