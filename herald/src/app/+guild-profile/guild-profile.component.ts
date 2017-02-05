@@ -32,13 +32,18 @@ export class GuildProfileComponent implements OnInit{
     this.guildProfileService.getGuildProfile(params['name'])
         .subscribe((guildProfile: GuildProfile) => {
                 this.guild = guildProfile;
-                console.log(this.guild);
                 this.playerDataStore.addPlayers(this.guild.players);
-                console.log(this.playerDataStore.players);
-                
-                this.playerDataStore.getPlayer('miromud')
-                    .then(() => {console.dir(this.playerDataStore.playerData)});
 
+                //testing below
+                this.playerDataStore.loadPlayer('tunenir')
+                    .then((data) => {
+                        console.log('loaded data:');
+                        console.dir(data);
+                        this.playerDataStore.sortPlayersForValue('level');
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
             },(error) => {
                 this.error = error;
             });
