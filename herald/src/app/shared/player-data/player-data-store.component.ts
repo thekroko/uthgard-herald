@@ -33,11 +33,8 @@ export class PlayerDataStore{
     addPlayerNameToAlpha(playerName: string){
         var i;
         for (i=0; i<this.playerNames['alpha'].length && playerName > this.playerNames['alpha'][i]; i++){
-            console.log(`${playerName} > ${this.playerNames['alpha'][i]}? ${playerName > this.playerNames['alpha'][i]}`);  
         }
-        console.log(`inserting ${playerName} at ${i}`);
         this.playerNames['alpha'].splice(Math.max(i, 0), 0, playerName);
-        this.testLogPlayerNamesAlpha();
     }
 
     //adds a list of player names to the list of player names
