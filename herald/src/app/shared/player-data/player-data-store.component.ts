@@ -26,7 +26,6 @@ export class PlayerDataStore{
     //adds a player name
     addPlayerName(playerName: string){
         this.playerNames['unsorted'].push(playerName);
-        //TODO: probably needs to re-sort on others with this player added, can presume others are sorted
         this.addPlayerNameToAlpha(playerName);
     }
 
@@ -110,8 +109,6 @@ export class PlayerDataStore{
 
             let data = JSON.parse(res.text());
             let foundPlayer = data;
-
-            //TODO: should this also add the player data?
 
             let newPlayer = new SmallPlayerData(
                       foundPlayer.fullName,
