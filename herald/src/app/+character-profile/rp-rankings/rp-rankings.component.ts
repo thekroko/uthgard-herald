@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, AfterContentInit, ViewChild} from '@angular/core';
 import {CharacterProfile} from '../shared/character-profile.model';
 
 import * as moment from 'moment';
@@ -10,18 +10,23 @@ const Chart = require('chart.js');
   styleUrls: ['../character-profile.component.css',
     './rp-rankings.component.css']
 })
-export class RpRankingsComponent implements OnInit {
+export class RpRankingsComponent implements AfterContentInit {
   @Input()
   character: CharacterProfile;
   activeBtn: number = 1;
 
+  @ViewChild('weeklyRPCanvas') weeklyRPCanvas;
+  @ViewChild('yearlyRPCanvas') yearlyRPCanvas;
+  @ViewChild('weeklyRankCanvas') weeklyRankCanvas;
+  @ViewChild('overallRankCanvas') overallRankCanvas;
+
   constructor() {
   }
 
-  ngOnInit() {
+  ngAfterContentInit() {
     //weekly RP graph
     let weeklyRpDate = moment().subtract(6, 'days');
-    new Chart(document.getElementById('weekly-rp-canvas'), {
+    new Chart(this.weeklyRPCanvas.nativeElement, {
       type: 'line',
       data: {
         labels: [
@@ -54,7 +59,7 @@ export class RpRankingsComponent implements OnInit {
 
     //monthly RP graph
     let monthlyRpDate = moment().subtract(11, 'months');
-    new Chart(document.getElementById('yearly-rp-canvas'), {
+    new Chart(this.yearlyRPCanvas.nativeElement, {
       type: 'line',
       data: {
         labels: [
@@ -91,7 +96,7 @@ export class RpRankingsComponent implements OnInit {
     });
 
     //weekly rank graph
-    new Chart(document.getElementById('weekly-rank-canvas'), {
+    new Chart(this.weeklyRankCanvas.nativeElement, {
       type: 'bar',
       data: {
         labels: ['Top All Classes', 'Top Armsman', '#25 All Classes', '#25 Armsman', 'Desperados'],
@@ -119,7 +124,7 @@ export class RpRankingsComponent implements OnInit {
     });
 
     //overall rank graph
-    new Chart(document.getElementById('overall-rank-canvas'), {
+    new Chart(this.overallRankCanvas.nativeElement, {
       type: 'bar',
       data: {
         labels: ['Top All Classes', 'Top Armsman', '#25 All Classes', '#25 Armsman', 'Desperados'],
