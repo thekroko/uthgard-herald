@@ -3,8 +3,12 @@ import {Component,OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ISubscription} from 'rxjs/Subscription';
 
+import {Http} from '@angular/http';
+
 import {GuildProfileService} from './shared/guild-profile.service';
 import {GuildProfile} from './shared/guild.model';
+
+import {PlayerDataStore} from '../shared/player-data/player-data-store.component';
 
 @Component({
   selector: 'herald-guild-profile',
@@ -16,7 +20,11 @@ export class GuildProfileComponent implements OnInit{
   guild: GuildProfile;
   error: string;
 
-  constructor(private route: ActivatedRoute, private guildProfileService: GuildProfileService) {
+  playerDataStore: PlayerDataStore = new PlayerDataStore(this.http);  
+
+  constructor(private route: ActivatedRoute,
+              private guildProfileService: GuildProfileService,
+              private http: Http) {
   }
 
   ngOnInit(){
@@ -24,7 +32,7 @@ export class GuildProfileComponent implements OnInit{
     this.guildProfileService.getGuildProfile(params['name'])
         .subscribe((guildProfile: GuildProfile) => {
                 this.guild = guildProfile;
-                console.log(this.guild);
+                this.playerDataStore.addPlayers(this.guild.players);
             },(error) => {
                 this.error = error;
             });
