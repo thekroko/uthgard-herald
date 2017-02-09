@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, AfterContentInit, ViewChild} from '@angular/core';
 import {CharacterProfile} from '../shared/character-profile.model';
 
 const Chart = require('chart.js');
@@ -9,15 +9,17 @@ const Chart = require('chart.js');
   styleUrls: ['../character-profile.component.css',
     './pve-kills.component.css']
 })
-export class PveKillsComponent implements OnInit {
+export class PveKillsComponent implements AfterContentInit {
   @Input()
   character: CharacterProfile;
   hasData = false;
 
+  @ViewChild('mobsKilled') mobsKilled;
+
   constructor() {
   }
 
-  ngOnInit() {
+  ngAfterContentInit() {
     let mobNames: string[] = [];
     let numKills: number[] = [];
     let qty = 0;
@@ -37,7 +39,7 @@ export class PveKillsComponent implements OnInit {
     }
     this.hasData = true;
 
-    new Chart(document.getElementById('mobs-killed'), {
+    new Chart(this.mobsKilled.nativeElement, {
       type: 'pie',
       data: {
         labels: mobNames,
