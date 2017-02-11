@@ -23,7 +23,7 @@
 
   <div id="general-items">
     <div class="table-wrapper">
-        <data-table [dataListener]="tableDataSubject" (headerClickEmitter)="handlePlayerTableHeaderClick($event)"></data-table> 
+        <data-table [hiddenColumns]="playerTableHiddenColumns" [headerConversions]="playerTableHeaders" [dataListener]="tableDataSubject" (headerClickEmitter)="handlePlayerTableHeaderClick($event)"></data-table> 
     </div>
   </div>
 
