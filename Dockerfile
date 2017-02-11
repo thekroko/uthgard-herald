@@ -10,7 +10,7 @@ RUN echo deb-src https://deb.nodesource.com/${NODEREPO} ${DISTRO} main >> /etc/a
 RUN apt-get update && apt-get install -y nodejs build-essential
 
 COPY ./herald /tmp/herald
-RUN cd /tmp/herald && npm install && npm run-script build && rm -rf node_modules
+RUN cd /tmp/herald && npm install && npm run-script build -- -prod && rm -rf node_modules
 RUN cd /tmp/herald/dist/ && cp -avr * /usr/share/nginx/html/.
 
 COPY ./nginx/conf.d /etc/nginx/conf.d
