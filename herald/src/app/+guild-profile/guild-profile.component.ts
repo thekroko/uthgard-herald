@@ -23,6 +23,19 @@ export class GuildProfileComponent implements OnInit{
 
   tableDataSubject: Subject<any> = new Subject<any>();
   currentSortColumn: string = '';
+  playerTableHeaders: {keyName: string, displayName: string}[] = [
+    {keyName: "fullName", displayName: "Name"},
+    {keyName: "raceName", displayName: "Race"},
+    {keyName: "className", displayName: "Class"},
+    {keyName: "level", displayName: "Level"},
+    {keyName: "realmRank", displayName: "Realm Rank"},
+  ];
+
+  playerTableHiddenColumns: string[] = [
+    'realm',
+    'rpPercent',
+    'xpPercent',
+  ];
 
   playerDataStore: PlayerDataStore = new PlayerDataStore(this.http);  
 

@@ -11,6 +11,12 @@ export class DataTableComponent implements OnInit{
     @Input()
     dataListener: Subject<any>;
 
+    @Input()
+    headerConversions: {keyName: string, displayName: string}[];
+
+    @Input()
+    hiddenColumns: string[];
+
     @Output()
     headerClickEmitter: EventEmitter<string> = new EventEmitter<string>();
 
@@ -23,6 +29,16 @@ export class DataTableComponent implements OnInit{
             console.dir(data);
             this.updateData(data);
         });
+    }
+
+    convertHeader(headerKey: string){
+        let matchObject = this.headerConversions.find((element) => {return element.keyName === headerKey}) || {displayName: headerKey};
+        return matchObject.displayName;
+    }
+
+    columnIsHidden(keyName: string): boolean{
+        let foundKey =  this.hiddenColumns.indexOf(keyName);
+        return foundKey !== -1;
     }
 
     headerClick(headerText: string){
@@ -48,6 +64,4 @@ export class DataTableComponent implements OnInit{
         console.log(Object.keys(validKeys));
         return Object.keys(validKeys); 
     }
-
-    
 }
