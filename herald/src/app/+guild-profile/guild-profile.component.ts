@@ -22,6 +22,7 @@ export class GuildProfileComponent implements OnInit{
   error: string;
 
   tableDataSubject: Subject<any> = new Subject<any>();
+  currentSortColumn: string = '';
 
   playerDataStore: PlayerDataStore = new PlayerDataStore(this.http);  
 
@@ -30,12 +31,6 @@ export class GuildProfileComponent implements OnInit{
               private http: Http) {
   }
 
-  handlePlayerTableHeaderClick(headerText: string){
-    this.playerDataStore.sortPlayersForValue(headerText)
-        .then((sortedPlayerData) => {
-           this.tableDataSubject.next(sortedPlayerData); 
-        });
-  }    
 
   ngOnInit(){
     this.sub = this.route.params.subscribe(params => {
@@ -62,5 +57,22 @@ export class GuildProfileComponent implements OnInit{
         console.log("noticed tableDataSubject on parent");
         console.log(data);
     });
+  }
+
+  handlePlayerTableHeaderClick(headerText: string){
+    this.playerDataStore.sortPlayersForValue(headerText)
+        .then((sortedPlayerData: any[]) => {
+            this.setSortColumn(headerText); 
+            
+            if (this.currentSortColumn[0] === '-'){sortedPlayerData.reverse()};
+
+            this.tableDataSubject.next(sortedPlayerData); 
+        });
+  }    
+
+  //sets the sort column based on the data passed in and the current sort column
+  setSortColumn(headerText: string){
+    //-before indicates descending sort
+    this.currentSortColumn = headerText === this.currentSortColumn ? `-${headerText}` : headerText;
   }
 }
