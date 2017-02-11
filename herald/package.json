@@ -4,7 +4,7 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "./node_modules/.bin/ng serve",
+    "start": "./node_modules/.bin/ng serve --proxy-config proxy.config.json",
     "lint": "./node_modules/.bin/tslint \"src/**/*.ts\"",
     "test": "./node_modules/.bin/ng test",
     "build": "./generate-guild-data.js; ./generate-player-data.js; ./node_modules/.bin/ng build",
