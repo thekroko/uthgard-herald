@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 //import {SmallPlayerData} from '../player-data/small-player-data';
 
 import {Subject} from 'rxjs/Subject';
@@ -11,6 +11,9 @@ export class DataTableComponent implements OnInit{
     @Input()
     dataListener: Subject<any>;
 
+    @Output()
+    headerClickEmitter: EventEmitter<string> = new EventEmitter<string>();
+
     currentData: any[] = [];
     currentCols: string[] = [];
 
@@ -20,6 +23,11 @@ export class DataTableComponent implements OnInit{
             console.dir(data);
             this.updateData(data);
         });
+    }
+
+    headerClick(headerText: string){
+        console.log(`header ${headerText} clicked`);
+        this.headerClickEmitter.emit(headerText);
     }
     
     updateData(data: any[]){

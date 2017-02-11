@@ -30,6 +30,13 @@ export class GuildProfileComponent implements OnInit{
               private http: Http) {
   }
 
+  handlePlayerTableHeaderClick(headerText: string){
+    this.playerDataStore.sortPlayersForValue(headerText)
+        .then((sortedPlayerData) => {
+           this.tableDataSubject.next(sortedPlayerData); 
+        });
+  }    
+
   ngOnInit(){
     this.sub = this.route.params.subscribe(params => {
     this.guildProfileService.getGuildProfile(params['name'])

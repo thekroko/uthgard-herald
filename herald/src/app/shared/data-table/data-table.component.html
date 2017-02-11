@@ -1,7 +1,7 @@
 <div class="data-table-inner">
     <table class="data-table">
         <tr class="data-table-header">
-            <td *ngFor="let data of currentCols">{{ data }}</td> 
+            <td *ngFor="let data of currentCols" (click)="headerClick(data)">{{ data }}</td> 
         </tr>
         <tr *ngFor="let data of currentData" class="data-table-row">
             <td *ngFor="let key of currentCols">{{ data[key] }}</td> 
