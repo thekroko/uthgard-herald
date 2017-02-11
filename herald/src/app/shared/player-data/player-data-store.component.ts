@@ -66,7 +66,7 @@ export class PlayerDataStore{
                             loadedCount++;
 
                             if (loadedCount >= this.playerNames['unsorted'].length){
-                                resolve(this.playerNames[valueKey]);
+                                resolve(this.namesToData(this.playerNames[valueKey]));
                             }
                         } else {
                             throw new Error(`Player cannot be sorted on ${valueKey}`);
@@ -75,6 +75,21 @@ export class PlayerDataStore{
                     }); 
             }    
         });
+    }
+    
+    /**
+    * converts a list of player names to the data held on them
+    * if no data is held, none will not be added
+    */
+    namesToData(names: string[]){
+        let playerData = [];
+        for (let i = 0; i < names.length; i++){
+            let playerCheckingData = this.playerData[names[i]];
+            if (playerCheckingData){
+                playerData.push(playerCheckingData);
+            }
+        }
+        return playerData;
     }
 
     //loads a player and adds it to the list of playerData
