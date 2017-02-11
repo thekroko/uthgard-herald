@@ -1,0 +1,8 @@
+{
+        "/herald/api/*": {
+                "target": "https://uthgard.org/",
+                "changeOrigin": true,
+                "logLevel": "debug",
+                "secure": false
+        }
+}

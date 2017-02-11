@@ -13,43 +13,44 @@ export class CharacterProfile {
               public xpPercent: number,
               public realmRankDecimal: number,
               public realmRankPercent: number,
-              public realmLevelPercent: number,
-              public guildEmblemId: number,
-              public relicsCaptured: number,
-              public keepsCaptured: number,
-              public keepBossesKilled: number,
-              public killDeathRatio: number,
-              public soloKillRatio: number,
-              public tradeskills: Tradeskill[],
-              public rvrStats: RvrKillStats,
-              public pveKills: PveKill[],
+              public realmLevelPercent: number = 0,
+              public guildEmblemId: number = 0,
+              public relicsCaptured: number = 0,
+              public keepsCaptured: number = 0,
+              public keepBossesKilled: number = 0,
+              public killDeathRatio: number = 0,
+              public soloKillRatio: number = 0,
+              public tradeskills: Tradeskill[] = [],
+              public rvrStats: RvrKillStats = new RvrKillStats(),
+              public pveKills: PveKill[] = [],
               /**
                * specific array order: Briton, Saracen, Highlander, Avalonian, Inconnu
                */
-              public albRaceKills: number[],
+              public albRaceKills: number[] = [0, 0, 0, 0, 0,],
               /**
                * specific array order: Celt, Lurikeen, Firbolg, Elf, Sylvan
                */
-              public hibRaceKills: number[],
+              public hibRaceKills: number[] = [0, 0, 0, 0, 0],
               /**
                * specific array order: Norse, Kobold, Troll, Dwarf, Valkyn
                */
-              public midRaceKills: number[],
+              public midRaceKills: number[] = [0, 0, 0, 0, 0],
               /**
                * specific array order: Armsman, Cabalist, Cleric, Friar, Infiltrator,
                * Mercenary, Minstrel, Necromancer, Paladin, Reaver, Scout, Sorcerer, Theurgist, Wizard
                */
-              public albClassKills: number[],
+              public albClassKills: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
               /**
                * specific array order: Berserker, Bonedancer, Healer, Hunter, Runemaster,
                * Savage, Shadowblade, Shaman, Skald, Spiritmaster, Thane, Warrior
                */
-              public hibClassKills: number[],
+              public hibClassKills: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
               /**
                * specific array order: Animist, Bard, Blademaster, Champion, Druid, Eldritch,
                * Enchanter, Hero, Mentalist, Nightshade, Ranger, Valewalker, Warden
                */
-              public midClassKills: number[]) {
+              public midClassKills: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
+     this.rvrStats = rvrStats||new RvrKillStats();
   };
 
 

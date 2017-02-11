@@ -1,5 +1,5 @@
 export const enum Realm {
-  Albion,
-  Hibernia,
-  Midgard
+  Albion = 1,
+  Hibernia = 2,
+  Midgard = 3
 }
