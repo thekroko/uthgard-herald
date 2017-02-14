@@ -11,6 +11,8 @@ import {GuildProfile} from './shared/guild.model';
 
 import {PlayerDataStore} from '../shared/player-data/player-data-store.component';
 
+import {SmallPlayerData} from '../shared/player-data/small-player-data';
+
 @Component({
   selector: 'herald-guild-profile',
   templateUrl: './guild-profile.component.html',
@@ -23,6 +25,9 @@ export class GuildProfileComponent implements OnInit{
 
   tableDataSubject: Subject<any> = new Subject<any>();
   currentSortColumn: string = '';
+  currentIterator: number = 0;
+  pageSize: number = 5;
+
   playerTableHeaders: {keyName: string, displayName: string}[] = [
     {keyName: "fullName", displayName: "Name"},
     {keyName: "raceName", displayName: "Race"},
@@ -52,14 +57,9 @@ export class GuildProfileComponent implements OnInit{
                 this.guild = guildProfile;
 
                 this.playerDataStore.addPlayers(this.guild.players);
+                this.playerDataStore.getPlayerRange(this.currentIterator,this.currentIterator+this.pageSize)
+                    .then((data) => {this.tableDataSubject.next(data)})
 
-                this.playerDataStore.sortPlayersForValue('raceName')
-                    .then((data) => {
-                        this.tableDataSubject.next(data);
-                    },
-                    (err) => {
-                        console.dir(err);
-                    })
             },(error) => {
                 this.error = error;
             });
@@ -74,12 +74,16 @@ export class GuildProfileComponent implements OnInit{
 
   handlePlayerTableHeaderClick(headerText: string){
     this.playerDataStore.sortPlayersForValue(headerText)
-        .then((sortedPlayerData: any[]) => {
+        .then(() => {
             this.setSortColumn(headerText); 
             
-            if (this.currentSortColumn[0] === '-'){sortedPlayerData.reverse()};
+            let reversed = this.currentSortColumn[0] === '-';
 
-            this.tableDataSubject.next(sortedPlayerData); 
+            this.playerDataStore.getPlayerRange(this.currentIterator, this.currentIterator + this.pageSize, reversed)
+                .then((returnedPlayerData: SmallPlayerData[]) => {
+                    if (this.currentSortColumn[0] === '-'){returnedPlayerData.reverse()};//TODO: reverse needs to be done at player data store level
+                    this.tableDataSubject.next(returnedPlayerData); 
+                })
         });
   }    
 

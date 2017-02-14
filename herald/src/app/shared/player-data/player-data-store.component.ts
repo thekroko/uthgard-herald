@@ -14,13 +14,28 @@ export class PlayerDataStore{
     }
 
     //returns players from the current sort between the values specified
-    getPlayerRange(startIndex: number, endIndex: number){
-       let selectedPlayers = this.playerNames[this.currentColumnSort].slice(startIndex, endIndex); 
-       let returnData = [];
-       for (let i = 0; i < selectedPlayers.length; i++){
-            returnData.push(this.playerData[selectedPlayers[i]]);
-       }
-       return returnData;
+    getPlayerRange(startIndex: number, endIndex: number, reverse: boolean = false): Promise<SmallPlayerData[]>{
+        
+        let firstIndex = reverse ? this.playerNames[this.currentColumnSort].length - startIndex : startIndex;
+        let secondIndex = reverse ? this.playerNames[this.currentColumnSort].length - endIndex : endIndex;
+
+        let firstIndexTemp = firstIndex;
+        firstIndex = Math.min(firstIndexTemp, secondIndex);
+        secondIndex = Math.max(firstIndexTemp, secondIndex);    
+
+        let selectedPlayers = this.playerNames[this.currentColumnSort].slice(firstIndex, secondIndex); 
+
+        return new Promise((resolve) => {
+            let playerPromises: Promise<SmallPlayerData>[] = []; 
+            
+            for (let i = 0; i < selectedPlayers.length; i++){
+                 playerPromises.push(this.loadPlayer(selectedPlayers[i]));
+            }
+
+            Promise.all(playerPromises).then((loadedValues) => {
+                resolve(loadedValues);//TODO: sort before resolve
+            });
+        })
     }
     
     //adds a player name
