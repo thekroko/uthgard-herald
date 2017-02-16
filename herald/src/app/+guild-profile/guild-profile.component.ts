@@ -20,14 +20,15 @@ import {SmallPlayerData} from '../shared/player-data/small-player-data';
 })
 export class GuildProfileComponent implements OnInit{
   sub: ISubscription;
-  guild: GuildProfile;
-  error: string;
+  guild: GuildProfile; //the guild which should be displayed
+  error: string; //whether there is an error
 
-  tableDataSubject: Subject<any> = new Subject<any>();
-  currentSortColumn: string = '';
-  currentIterator: number = 0;
-  pageSize: number = 5;
+  tableDataSubject: Subject<any> = new Subject<any>(); //to provide data to the player table
+  currentSortColumn: string = ''; //which column of the table is currently sorted
+  currentIterator: number = 0; //the index at which player data starts
+  pageSize: number = 5; //the amount of players to be displayed per page of hte guild profile
 
+  //used to convert keys of player data to display names
   playerTableHeaders: {keyName: string, displayName: string}[] = [
     {keyName: "fullName", displayName: "Name"},
     {keyName: "raceName", displayName: "Race"},
@@ -36,12 +37,14 @@ export class GuildProfileComponent implements OnInit{
     {keyName: "realmRank", displayName: "Realm Rank"},
   ];
 
+  //which columns of the player data are hidden
   playerTableHiddenColumns: string[] = [
     'realm',
     'rpPercent',
     'xpPercent',
   ];
 
+  //used to store, sort, and retrieve player data
   playerDataStore: PlayerDataStore = new PlayerDataStore(this.http);  
 
   constructor(private route: ActivatedRoute,
@@ -58,20 +61,19 @@ export class GuildProfileComponent implements OnInit{
 
                 this.playerDataStore.addPlayers(this.guild.players);
                 this.playerDataStore.getPlayerRange(this.currentIterator,this.currentIterator+this.pageSize)
-                    .then((data) => {this.tableDataSubject.next(data)})
+                    .then((data) => {this.tableDataSubject.next(data); console.dir(this.playerDataStore.playerData)})
 
             },(error) => {
                 this.error = error;
             });
     });
-    
-    //this is just to test data listening
-    this.tableDataSubject.subscribe(data => {
-        console.log("noticed tableDataSubject on parent");
-        console.log(data);
-    });
   }
 
+  /**
+  * responds to a click on a player table header, in this case by sending
+  * sorted data to the player table
+  * @param headerText the header of the column clicked
+  */
   handlePlayerTableHeaderClick(headerText: string){
     this.playerDataStore.sortPlayersForValue(headerText)
         .then(() => {
@@ -83,13 +85,17 @@ export class GuildProfileComponent implements OnInit{
                 .then((returnedPlayerData: SmallPlayerData[]) => {
                     if (this.currentSortColumn[0] === '-'){returnedPlayerData.reverse()};//TODO: reverse needs to be done at player data store level
                     this.tableDataSubject.next(returnedPlayerData); 
+                    console.dir(this.playerDataStore.playerData);
                 })
         });
   }    
 
-  //sets the sort column based on the data passed in and the current sort column
+  /**
+  * sets the sort column based on the data passed in and the current sort column
+  * @param headerText the headerText which was clicked
+  */
   setSortColumn(headerText: string){
     //-before indicates descending sort
-    this.currentSortColumn = headerText === this.currentSortColumn ? `-${headerText}` : headerText;
+    this.currentSortColumn = headerText === this.currentSortColumn ? `-${headerText}` : headerText; //sets to reversed sort if the column sort is the same
   }
 }
