@@ -9,6 +9,7 @@ import {CharacterProfileComponent, ProgressComponent, PveKillsComponent, RaceCla
 } from './+character-profile';
 import {GuildProfileComponent} from './+guild-profile/guild-profile.component';
 import {CharacterProfileService} from './+character-profile';
+import {DataTableComponent} from './shared/data-table/data-table.component';
 import {GuildProfileService} from './+guild-profile/shared/guild-profile.service';
 import {HomeComponent} from './+home';
 
@@ -26,6 +27,7 @@ import {HomeComponent} from './+home';
     SiegeStatsComponent,
     TradeskillsComponent,
     GuildProfileComponent,
+    DataTableComponent,
   ],
   bootstrap: [AppComponent],     // root component
   providers: [CharacterProfileService,// services
