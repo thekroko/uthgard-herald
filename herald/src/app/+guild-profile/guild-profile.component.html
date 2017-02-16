@@ -21,8 +21,8 @@
     </div>
   </div>
 
-  <div id="general-items">
-    <div class="table-wrapper">
+  <div class="row" id="general-items">
+    <div class="col-sm-12 col-md-6 table-wrapper">
         <data-table [hiddenColumns]="playerTableHiddenColumns" [headerConversions]="playerTableHeaders" [dataListener]="tableDataSubject" (headerClickEmitter)="handlePlayerTableHeaderClick($event)"></data-table> 
     </div>
   </div>
