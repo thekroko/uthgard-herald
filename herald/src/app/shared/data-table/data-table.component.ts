@@ -23,8 +23,6 @@ export class DataTableComponent implements OnInit {
     currentCols: string[] = []; //used to store the keys against which columns can be formed
 
     ngOnInit() {
-        console.log('data table init');
-        console.dir(this.dataListener);
         this.dataListener.subscribe((data) => {
             this.updateData(data);
         });
