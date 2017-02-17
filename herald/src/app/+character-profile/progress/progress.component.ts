@@ -13,7 +13,7 @@ export class ProgressComponent implements AfterContentInit {
   @Input()
   character: CharacterProfile;
 
-  @ViewChild('progressCanvas') progressCanvas 
+  @ViewChild('progressCanvas') progressCanvas;
 
   constructor() {
   }

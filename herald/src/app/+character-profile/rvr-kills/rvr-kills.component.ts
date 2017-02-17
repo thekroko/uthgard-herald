@@ -40,7 +40,7 @@ export class RvrKillsComponent implements AfterContentInit {
     }
 
 
-    let killStatsCanvas = this.killStats.nativeElement; 
+    let killStatsCanvas = this.killStats.nativeElement;
     new Chart(killStatsCanvas, {
       type: 'bar',
       data: {

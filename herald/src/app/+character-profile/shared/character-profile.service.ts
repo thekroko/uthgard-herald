@@ -7,11 +7,11 @@ import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class CharacterProfileService {
-  
+
   private USE_MOCK_DATA = false;
   private API_URL = 'https://uthgard.org/herald/api/players';
 
-  constructor(private http: Http){
+  constructor(private http: Http) {
     if (isDevMode()) {
       this.API_URL = '/herald/api/player/';
     }
@@ -28,7 +28,7 @@ export class CharacterProfileService {
     if (this.USE_MOCK_DATA) {
       return this.getPlayerFromMockDataWithDelay(name, 100);
     } else {
-      var observable = this.getPlayerFromAPI(name);
+      let observable = this.getPlayerFromAPI(name);
       return new Promise<CharacterProfile>((resolve, reject) => {
         observable.subscribe(profile => resolve(profile),
                              error => reject(error));
@@ -86,10 +86,10 @@ export class CharacterProfileService {
    */
   private getPlayerFromAPIResponse(response: Response): CharacterProfile {
     const json = response.json();
-    const realm : Realm = {
-      ALBION:Realm.Albion,
-      HIBERNIA:Realm.Hibernia,
-      MIDGARD:Realm.Midgard
+    const realm: Realm = {
+      ALBION: Realm.Albion,
+      HIBERNIA: Realm.Hibernia,
+      MIDGARD: Realm.Midgard
     }[json.Realm];
     const profile = new CharacterProfile(
       <string>json.Name,
@@ -99,7 +99,7 @@ export class CharacterProfileService {
       <string>json.Guild,
       <number>json.Level,
       <number>json.XpPercentOfLevel,
-      <number>json.RealmRank/10,
+      <number>json.RealmRank / 10,
       <number>json.RpPercentOfLevel,
     );
     return profile;

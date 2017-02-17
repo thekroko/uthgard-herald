@@ -9,24 +9,24 @@ import {Observable} from 'rxjs/Rx';
 @Injectable()
 export class GuildProfileService {
 
-  constructor(private http: Http){}
+  constructor(private http: Http) {}
 
   /**
    * Gets the GuildProfile of a character
    * @param name The guild's name to look up
    * @returns {Promise<GuildProfile>}
    */
-  getGuildProfile(name: string): Observable<GuildProfile>{
+  getGuildProfile(name: string): Observable<GuildProfile> {
     //todo hook into real API once it exists
     return this.getGuildProfileFromFile(name);
   }
 
-  private getGuildProfileFromFile(name: string){
-    let fileName = name.replace(/ /g, "-");
+  private getGuildProfileFromFile(name: string) {
+    let fileName = name.replace(/ /g, '-');
     return this.http.get(`/assets/data/guilds/${fileName}.json`)
                     .map((res) => {
 
-                      if (res.status !== 200){
+                      if (res.status !== 200) {
                         throw new Error('Guild not found');
                       }
 
@@ -38,7 +38,7 @@ export class GuildProfileService {
                       return new GuildProfile(
                         foundGuild.name,
                         foundGuild.guildContact,
-                        foundGuild.guildWebsite, 
+                        foundGuild.guildWebsite,
                         foundGuild.guildHouse,
                         foundGuild.guildRealmPoints,
                         foundGuild.players,
