@@ -71,6 +71,7 @@ guilds.push({
     guildRealm: 'Albion',
     guildWebsite: 'www.google.co.uk',
     guildContact: 'test@test.com',
+    players: []
 });
 
 guildNames.push('Test Guild');
