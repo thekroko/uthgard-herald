@@ -85,22 +85,22 @@ export class CharacterProfileService {
    * @returns {CharacterProfile}
    */
   private getPlayerFromAPIResponse(response: Response): CharacterProfile {
-    const json = response.json(), raw = json.Raw;
+    const json = response.json();
     const realm : Realm = {
-      1: Realm.Albion,
-      2: Realm.Midgard,
-      3: Realm.Hibernia
-    }[raw.Realm];
+      ALBION:Realm.Albion,
+      HIBERNIA:Realm.Hibernia,
+      MIDGARD:Realm.Midgard
+    }[json.Realm];
     const profile = new CharacterProfile(
-      <string>json.FullName,
-      <string>json.ClassName,
-      <string>json.RaceName,
+      <string>json.Name,
+      <string>json.Class,
+      <string>json.Race,
       realm,
-      <string>raw.GuildName,
+      <string>json.Guild,
       <number>json.Level,
-      <number>json.XP_Percent,
-      <number>json.RealmRank,
-      <number>json.RP_Percent,
+      <number>json.XpPercentOfLevel,
+      <number>json.RealmRank/10,
+      <number>json.RpPercentOfLevel,
     );
     return profile;
   }
