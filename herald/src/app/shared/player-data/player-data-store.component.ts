@@ -46,7 +46,7 @@ export class PlayerDataStore{
             Promise.all(playerPromises).then((loadedValues) => {
                 resolve(loadedValues);//TODO: sort before resolve
             });
-        })
+        });
     }
     
     /**
@@ -63,7 +63,7 @@ export class PlayerDataStore{
     * @param playername the name to be added
     */
     addPlayerNameToAlpha(playerName: string){
-        var i;
+        let i;
         for (i=0; i<this.playerNames['alpha'].length && playerName > this.playerNames['alpha'][i]; i++){
         }
         this.playerNames['alpha'].splice(Math.max(i, 0), 0, playerName);
@@ -90,14 +90,14 @@ export class PlayerDataStore{
             let sortedPlayers = [];
             let loadedCount = 0;
 
-            for (let i = 0; i < this.playerNames['unsorted'].length; i++){
-                let currPlayer = this.playerNames['unsorted'][i];
+            for (let n = 0; n < this.playerNames['unsorted'].length; n++){
+                let currPlayer = this.playerNames['unsorted'][n];
                 this.getPlayerData(currPlayer)
                     .subscribe(data => {
 
                         if(data[valueKey]) {
                             this.currentColumnSort = valueKey;
-                            var i;
+                            let i;
                             for (i=0; i<sortedPlayers.length && data[valueKey] > sortedPlayers[i][valueKey]; i++){}
 
                             sortedPlayers.splice(Math.max(i, 0), 0, data);
@@ -148,7 +148,7 @@ export class PlayerDataStore{
                     .subscribe(data => {
                         this.playerData[playerName] = data;
                         resolve(data); 
-                    })         
+                    });
             }
         }); 
     }
@@ -192,7 +192,7 @@ export class PlayerDataStore{
         for (let i = 0; i < this.playerNames['alpha'].length; i++){
             console.log(`player at: ${i}: ${this.playerNames['alpha'][i]}`);
         }
-        console.log("============================");
+        console.log('============================');
     }
     
     testLogPlayerNamesKey(valueKey: string){

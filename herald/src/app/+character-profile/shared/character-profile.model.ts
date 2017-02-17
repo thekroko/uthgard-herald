@@ -26,7 +26,7 @@ export class CharacterProfile {
               /**
                * specific array order: Briton, Saracen, Highlander, Avalonian, Inconnu
                */
-              public albRaceKills: number[] = [0, 0, 0, 0, 0,],
+              public albRaceKills: number[] = [0, 0, 0, 0, 0],
               /**
                * specific array order: Celt, Lurikeen, Firbolg, Elf, Sylvan
                */
@@ -50,7 +50,7 @@ export class CharacterProfile {
                * Enchanter, Hero, Mentalist, Nightshade, Ranger, Valewalker, Warden
                */
               public midClassKills: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) {
-     this.rvrStats = rvrStats||new RvrKillStats();
+     this.rvrStats = rvrStats || new RvrKillStats();
   };
 
 

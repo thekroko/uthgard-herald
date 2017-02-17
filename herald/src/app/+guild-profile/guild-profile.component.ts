@@ -30,11 +30,11 @@ export class GuildProfileComponent implements OnInit{
 
   //used to convert keys of player data to display names
   playerTableHeaders: {keyName: string, displayName: string}[] = [
-    {keyName: "fullName", displayName: "Name"},
-    {keyName: "raceName", displayName: "Race"},
-    {keyName: "className", displayName: "Class"},
-    {keyName: "level", displayName: "Level"},
-    {keyName: "realmRank", displayName: "Realm Rank"},
+    {keyName: 'fullName', displayName: 'Name'},
+    {keyName: 'raceName', displayName: 'Race'},
+    {keyName: 'className', displayName: 'Class'},
+    {keyName: 'level', displayName: 'Level'},
+    {keyName: 'realmRank', displayName: 'Realm Rank'},
   ];
 
   //which columns of the player data are hidden
@@ -60,8 +60,11 @@ export class GuildProfileComponent implements OnInit{
                 this.guild = guildProfile;
 
                 this.playerDataStore.addPlayers(this.guild.players);
-                this.playerDataStore.getPlayerRange(this.currentIterator,this.currentIterator+this.pageSize)
-                    .then((data) => {this.tableDataSubject.next(data); console.dir(this.playerDataStore.playerData)})
+                this.playerDataStore.getPlayerRange(this.currentIterator, this.currentIterator + this.pageSize)
+                    .then((data) => {
+                            this.tableDataSubject.next(data);
+                            console.dir(this.playerDataStore.playerData);
+                    });
 
             },(error) => {
                 this.error = error;
@@ -81,12 +84,16 @@ export class GuildProfileComponent implements OnInit{
             
             let reversed = this.currentSortColumn[0] === '-';
 
-            this.playerDataStore.getPlayerRange(this.currentIterator, this.currentIterator + this.pageSize, reversed)
-                .then((returnedPlayerData: SmallPlayerData[]) => {
-                    if (this.currentSortColumn[0] === '-'){returnedPlayerData.reverse()};//TODO: reverse needs to be done at player data store level
+            this.playerDataStore.getPlayerRange(this.currentIterator, this.currentIterator + this.pageSize, reversed).then(
+                (returnedPlayerData: SmallPlayerData[]) => {
+                    if (this.currentSortColumn[0] === '-'){
+                        //TODO: reverse needs to be done at player data store level
+                        returnedPlayerData.reverse();
+                    };
                     this.tableDataSubject.next(returnedPlayerData); 
                     console.dir(this.playerDataStore.playerData);
-                })
+                }
+            );
         });
   }    
 
@@ -96,6 +103,7 @@ export class GuildProfileComponent implements OnInit{
   */
   setSortColumn(headerText: string){
     //-before indicates descending sort
-    this.currentSortColumn = headerText === this.currentSortColumn ? `-${headerText}` : headerText; //sets to reversed sort if the column sort is the same
+    //sets to reversed sort if the column sort is the same
+    this.currentSortColumn = headerText === this.currentSortColumn ? `-${headerText}` : headerText;
   }
 }

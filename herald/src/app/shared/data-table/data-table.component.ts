@@ -36,7 +36,7 @@ export class DataTableComponent implements OnInit{
     * @returns         the converted key, or the original, if there was no match
     */
     convertHeader(headerKey: string){
-        let matchObject = this.headerConversions.find((element) => {return element.keyName === headerKey}) || {displayName: headerKey};
+        let matchObject = this.headerConversions.find((element) => {return element.keyName === headerKey;}) || {displayName: headerKey};
         return matchObject.displayName;
     }
 

@@ -28,7 +28,7 @@ export class CharacterProfileService {
     if (this.USE_MOCK_DATA) {
       return this.getPlayerFromMockDataWithDelay(name, 100);
     } else {
-      var observable = this.getPlayerFromAPI(name);
+      let observable = this.getPlayerFromAPI(name);
       return new Promise<CharacterProfile>((resolve, reject) => {
         observable.subscribe(profile => resolve(profile),
                              error => reject(error));
@@ -86,7 +86,7 @@ export class CharacterProfileService {
    */
   private getPlayerFromAPIResponse(response: Response): CharacterProfile {
     const json = response.json();
-    const realm : Realm = {
+    const realm: Realm = {
       ALBION:Realm.Albion,
       HIBERNIA:Realm.Hibernia,
       MIDGARD:Realm.Midgard
