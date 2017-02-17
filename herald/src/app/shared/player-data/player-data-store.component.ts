@@ -3,8 +3,8 @@ import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 export class PlayerDataStore {
-         
-    public playerData: SmallPlayerData[] = []; //the data for the players, indexed against their names 
+
+    public playerData: SmallPlayerData[] = []; //the data for the players, indexed against their names
     public playerNames: any  = {}; //as column_name: [list of player names sorted by that] (including an unsorted)
     public currentColumnSort: string; //alphabetical as default sort
 
@@ -13,7 +13,7 @@ export class PlayerDataStore {
     * @param presumedSort the column which will be the presumed sort by default
     */
     constructor(private http:Http, presumedSort: string = 'alpha') {
-        //this.playerNames['unsorted'] = []; 
+        //this.playerNames['unsorted'] = [];
         //this.playerNames['alpha'] = []; //to ensure we always have an alpha sorted list
         this.initDefaultPlayerDataStoreValues();
         this.currentColumnSort = presumedSort;
