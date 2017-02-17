@@ -2,7 +2,7 @@ import {SmallPlayerData} from './small-player-data';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
-export class PlayerDataStore{
+export class PlayerDataStore {
 
     public playerData: SmallPlayerData[] = []; //the data for the players, indexed against their names
     public playerNames: string[] = []; //as column_name: [list of player names sorted by that] (including an unsorted)
@@ -12,7 +12,7 @@ export class PlayerDataStore{
     * @param http         the http service which will be used to fetch character data
     * @param presumedSort the column which will be the presumed sort by default
     */
-    constructor(private http:Http, presumedSort: string = 'alpha'){
+    constructor(private http: Http, presumedSort: string = 'alpha') {
         this.playerNames['unsorted'] = [];
         this.playerNames['alpha'] = []; //to ensure we always have an alpha sorted list
         this.currentColumnSort = presumedSort;
@@ -25,7 +25,7 @@ export class PlayerDataStore{
     * @param reversed   do we want to work from the end of the list?
     * @returns          a promise of an array of SmallPlayerData for the range specified
     */
-    getPlayerRange(startIndex: number, endIndex: number, reverse: boolean = false): Promise<SmallPlayerData[]>{
+    getPlayerRange(startIndex: number, endIndex: number, reverse: boolean = false): Promise<SmallPlayerData[]> {
 
         let firstIndex = reverse ? this.playerNames[this.currentColumnSort].length - startIndex : startIndex;
         let secondIndex = reverse ? this.playerNames[this.currentColumnSort].length - endIndex : endIndex;
@@ -39,12 +39,12 @@ export class PlayerDataStore{
         return new Promise((resolve) => {
             let playerPromises: Promise<SmallPlayerData>[] = [];
 
-            for (let i = 0; i < selectedPlayers.length; i++){
+            for (let i = 0; i < selectedPlayers.length; i++) {
                  playerPromises.push(this.loadPlayer(selectedPlayers[i]));
             }
 
             Promise.all(playerPromises).then((loadedValues) => {
-                resolve(loadedValues);//TODO: sort before resolve
+                resolve(loadedValues); //TODO: sort before resolve
             });
         });
     }
@@ -53,7 +53,7 @@ export class PlayerDataStore{
     * adds a player name to the unsorted and alpha lists
     * @param playerName the name to be added
     */
-    addPlayerName(playerName: string){
+    addPlayerName(playerName: string) {
         this.playerNames['unsorted'].push(playerName);
         this.addPlayerNameToAlpha(playerName);
     }
@@ -62,10 +62,9 @@ export class PlayerDataStore{
     * inserts the player name into the alpha list at the correct position
     * @param playername the name to be added
     */
-    addPlayerNameToAlpha(playerName: string){
+    addPlayerNameToAlpha(playerName: string) {
         let i;
-        for (i=0; i<this.playerNames['alpha'].length && playerName > this.playerNames['alpha'][i]; i++){
-        }
+        for (i = 0; i < this.playerNames['alpha'].length && playerName > this.playerNames['alpha'][i]; i++) {}
         this.playerNames['alpha'].splice(Math.max(i, 0), 0, playerName);
     }
 
@@ -73,8 +72,8 @@ export class PlayerDataStore{
     * adds a list of player names to the list of player names
     * @param playerNames the list of names to be added
     */
-    addPlayers(playerNames: string[]){
-        for (let i = 0; i < playerNames.length; i++){
+    addPlayers(playerNames: string[]) {
+        for (let i = 0; i < playerNames.length; i++) {
             this.addPlayerName(playerNames[i]);
         }
     }
@@ -85,27 +84,27 @@ export class PlayerDataStore{
     * @param valueKey the key of the property on which to sort
     * @returns        a promise with the player data sorted on the key provided
     */
-    sortPlayersForValue(valueKey: string){
+    sortPlayersForValue(valueKey: string) {
         return new Promise(resolve => {
             let sortedPlayers = [];
             let loadedCount = 0;
 
-            for (let n = 0; n < this.playerNames['unsorted'].length; n++){
+            for (let n = 0; n < this.playerNames['unsorted'].length; n++) {
                 let currPlayer = this.playerNames['unsorted'][n];
                 this.getPlayerData(currPlayer)
                     .subscribe(data => {
 
-                        if(data[valueKey]) {
+                        if (data[valueKey]) {
                             this.currentColumnSort = valueKey;
                             let i;
-                            for (i=0; i<sortedPlayers.length && data[valueKey] > sortedPlayers[i][valueKey]; i++){}
+                            for (i = 0; i < sortedPlayers.length && data[valueKey] > sortedPlayers[i][valueKey]; i++) {}
 
                             sortedPlayers.splice(Math.max(i, 0), 0, data);
                             this.playerNames[valueKey] = sortedPlayers.map(p => p.fullName);
 
                             loadedCount++;
 
-                            if (loadedCount >= this.playerNames['unsorted'].length){
+                            if (loadedCount >= this.playerNames['unsorted'].length) {
                                 resolve(this.namesToData(this.playerNames[valueKey]));
                             }
                         } else {
@@ -123,11 +122,11 @@ export class PlayerDataStore{
     * @param names the list of player names for which data is needed
     * @returns     the data for the players, where it was available
     */
-    namesToData(names: string[]){
+    namesToData(names: string[]) {
         let playerData = [];
-        for (let i = 0; i < names.length; i++){
+        for (let i = 0; i < names.length; i++) {
             let playerCheckingData = this.playerData[names[i]];
-            if (playerCheckingData){
+            if (playerCheckingData) {
                 playerData.push(playerCheckingData);
             }
         }
@@ -139,9 +138,9 @@ export class PlayerDataStore{
     * @param playerName the name of the player to be added
     * @returns          a promise with the data for the player
     */
-    loadPlayer(playerName: string){
+    loadPlayer(playerName: string) {
         return new Promise(resolve => {
-            if (this.playerData[playerName]){
+            if (this.playerData[playerName]) {
                 resolve(this.playerData[playerName]);
             } else {
                 this.getPlayerData(playerName)
@@ -158,12 +157,12 @@ export class PlayerDataStore{
     * @param playerName the name of the player for which data is being reuqested
     * @returns          an observable which will return the data for the player requested
     */
-    getPlayerData(playerName): Observable<SmallPlayerData>{
+    getPlayerData(playerName): Observable<SmallPlayerData> {
       let playerUrl = `/assets/data/players/${playerName}.json`;
 
       return this.http.get(playerUrl)
         .map((res) => {
-            if (res.status !== 200){
+            if (res.status !== 200) {
                 throw new Error('Player not found');
             }
 
@@ -188,15 +187,15 @@ export class PlayerDataStore{
         });
      }
 
-    testLogPlayerNamesAlpha(){
-        for (let i = 0; i < this.playerNames['alpha'].length; i++){
+    testLogPlayerNamesAlpha() {
+        for (let i = 0; i < this.playerNames['alpha'].length; i++) {
             console.log(`player at: ${i}: ${this.playerNames['alpha'][i]}`);
         }
         console.log('============================');
     }
 
-    testLogPlayerNamesKey(valueKey: string){
-        for (let i = 0; i < this.playerNames[valueKey].length; i++){
+    testLogPlayerNamesKey(valueKey: string) {
+        for (let i = 0; i < this.playerNames[valueKey].length; i++) {
             console.log(`player at ${i}: ${this.playerNames[valueKey][i]}`);
             console.dir(this.playerNames[valueKey][i]);
         }

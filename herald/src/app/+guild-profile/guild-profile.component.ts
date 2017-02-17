@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs/Rx';
@@ -18,7 +18,7 @@ import {SmallPlayerData} from '../shared/player-data/small-player-data';
   templateUrl: './guild-profile.component.html',
   styleUrls: ['./guild-profile.component.css'],
 })
-export class GuildProfileComponent implements OnInit{
+export class GuildProfileComponent implements OnInit {
   sub: ISubscription;
   guild: GuildProfile; //the guild which should be displayed
   error: string; //whether there is an error
@@ -53,7 +53,7 @@ export class GuildProfileComponent implements OnInit{
   }
 
 
-  ngOnInit(){
+  ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
     this.guildProfileService.getGuildProfile(params['name'])
         .subscribe((guildProfile: GuildProfile) => {
@@ -66,7 +66,7 @@ export class GuildProfileComponent implements OnInit{
                             console.dir(this.playerDataStore.playerData);
                     });
 
-            },(error) => {
+            }, (error) => {
                 this.error = error;
             });
     });
@@ -77,7 +77,7 @@ export class GuildProfileComponent implements OnInit{
   * sorted data to the player table
   * @param headerText the header of the column clicked
   */
-  handlePlayerTableHeaderClick(headerText: string){
+  handlePlayerTableHeaderClick(headerText: string) {
     this.playerDataStore.sortPlayersForValue(headerText)
         .then(() => {
             this.setSortColumn(headerText);
@@ -86,7 +86,7 @@ export class GuildProfileComponent implements OnInit{
 
             this.playerDataStore.getPlayerRange(this.currentIterator, this.currentIterator + this.pageSize, reversed).then(
                 (returnedPlayerData: SmallPlayerData[]) => {
-                    if (this.currentSortColumn[0] === '-'){
+                    if (this.currentSortColumn[0] === '-') {
                         //TODO: reverse needs to be done at player data store level
                         returnedPlayerData.reverse();
                     };
@@ -101,7 +101,7 @@ export class GuildProfileComponent implements OnInit{
   * sets the sort column based on the data passed in and the current sort column
   * @param headerText the headerText which was clicked
   */
-  setSortColumn(headerText: string){
+  setSortColumn(headerText: string) {
     //-before indicates descending sort
     //sets to reversed sort if the column sort is the same
     this.currentSortColumn = headerText === this.currentSortColumn ? `-${headerText}` : headerText;

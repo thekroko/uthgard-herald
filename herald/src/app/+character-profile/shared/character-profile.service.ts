@@ -11,7 +11,7 @@ export class CharacterProfileService {
   private USE_MOCK_DATA = false;
   private API_URL = 'https://uthgard.org/herald/api/players';
 
-  constructor(private http: Http){
+  constructor(private http: Http) {
     if (isDevMode()) {
       this.API_URL = '/herald/api/player/';
     }
@@ -87,9 +87,9 @@ export class CharacterProfileService {
   private getPlayerFromAPIResponse(response: Response): CharacterProfile {
     const json = response.json();
     const realm: Realm = {
-      ALBION:Realm.Albion,
-      HIBERNIA:Realm.Hibernia,
-      MIDGARD:Realm.Midgard
+      ALBION: Realm.Albion,
+      HIBERNIA: Realm.Hibernia,
+      MIDGARD: Realm.Midgard
     }[json.Realm];
     const profile = new CharacterProfile(
       <string>json.Name,
@@ -99,7 +99,7 @@ export class CharacterProfileService {
       <string>json.Guild,
       <number>json.Level,
       <number>json.XpPercentOfLevel,
-      <number>json.RealmRank/10,
+      <number>json.RealmRank / 10,
       <number>json.RpPercentOfLevel,
     );
     return profile;

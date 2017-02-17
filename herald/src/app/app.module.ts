@@ -30,7 +30,7 @@ import {HomeComponent} from './+home';
     DataTableComponent,
   ],
   bootstrap: [AppComponent],     // root component
-  providers: [CharacterProfileService,// services
+  providers: [CharacterProfileService, // services
     GuildProfileService,
   ]
 })

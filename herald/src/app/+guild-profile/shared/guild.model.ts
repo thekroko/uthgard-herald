@@ -1,4 +1,4 @@
-export class GuildProfile{
+export class GuildProfile {
 
 /**
 *
@@ -11,6 +11,5 @@ constructor(public name: string,
             public guildHouse: string,
             public guildRealmPoints: number,
             public players: string[],
-            public realm: string){
-            }
+            public realm: string) {}
 }
