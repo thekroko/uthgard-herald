@@ -9,7 +9,7 @@ import {Observable} from 'rxjs/Rx';
 export class CharacterProfileService {
 
   private USE_MOCK_DATA = false;
-  private API_URL = 'https://uthgard.org/herald/api/players/';
+  private API_URL = 'https://uthgard.org/herald/api/player/';
 
   constructor(private http: Http) {
     if (isDevMode()) {
