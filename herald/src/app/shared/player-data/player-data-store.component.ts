@@ -3,8 +3,8 @@ import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 export class PlayerDataStore{
-         
-    public playerData: SmallPlayerData[] = []; //the data for the players, indexed against their names 
+
+    public playerData: SmallPlayerData[] = []; //the data for the players, indexed against their names
     public playerNames: string[] = []; //as column_name: [list of player names sorted by that] (including an unsorted)
     public currentColumnSort: string; //alphabetical as default sort
 
@@ -13,7 +13,7 @@ export class PlayerDataStore{
     * @param presumedSort the column which will be the presumed sort by default
     */
     constructor(private http:Http, presumedSort: string = 'alpha'){
-        this.playerNames['unsorted'] = []; 
+        this.playerNames['unsorted'] = [];
         this.playerNames['alpha'] = []; //to ensure we always have an alpha sorted list
         this.currentColumnSort = presumedSort;
     }
@@ -23,22 +23,22 @@ export class PlayerDataStore{
     * @param startIndex the index from which to start
     * @param endIndex   the index at which to end
     * @param reversed   do we want to work from the end of the list?
-    * @returns          a promise of an array of SmallPlayerData for the range specified 
+    * @returns          a promise of an array of SmallPlayerData for the range specified
     */
     getPlayerRange(startIndex: number, endIndex: number, reverse: boolean = false): Promise<SmallPlayerData[]>{
-        
+
         let firstIndex = reverse ? this.playerNames[this.currentColumnSort].length - startIndex : startIndex;
         let secondIndex = reverse ? this.playerNames[this.currentColumnSort].length - endIndex : endIndex;
 
         let firstIndexTemp = firstIndex;
         firstIndex = Math.min(firstIndexTemp, secondIndex);
-        secondIndex = Math.max(firstIndexTemp, secondIndex);    
+        secondIndex = Math.max(firstIndexTemp, secondIndex);
 
-        let selectedPlayers = this.playerNames[this.currentColumnSort].slice(firstIndex, secondIndex); 
+        let selectedPlayers = this.playerNames[this.currentColumnSort].slice(firstIndex, secondIndex);
 
         return new Promise((resolve) => {
-            let playerPromises: Promise<SmallPlayerData>[] = []; 
-            
+            let playerPromises: Promise<SmallPlayerData>[] = [];
+
             for (let i = 0; i < selectedPlayers.length; i++){
                  playerPromises.push(this.loadPlayer(selectedPlayers[i]));
             }
@@ -48,7 +48,7 @@ export class PlayerDataStore{
             });
         });
     }
-    
+
     /**
     * adds a player name to the unsorted and alpha lists
     * @param playerName the name to be added
@@ -76,10 +76,10 @@ export class PlayerDataStore{
     addPlayers(playerNames: string[]){
         for (let i = 0; i < playerNames.length; i++){
             this.addPlayerName(playerNames[i]);
-        } 
+        }
     }
-    
-    /** 
+
+    /**
     * sets a sorted list of player names according the the value key provided,
     * and returns a promise with the sorted data
     * @param valueKey the key of the property on which to sort
@@ -112,11 +112,11 @@ export class PlayerDataStore{
                             throw new Error(`Player cannot be sorted on ${valueKey}`);
                         }
 
-                    }); 
-            }    
+                    });
+            }
         });
     }
-    
+
     /**
     * converts a list of player names to the data held on them
     * if no data is held, none will not be added
@@ -142,15 +142,15 @@ export class PlayerDataStore{
     loadPlayer(playerName: string){
         return new Promise(resolve => {
             if (this.playerData[playerName]){
-                resolve(this.playerData[playerName]); 
+                resolve(this.playerData[playerName]);
             } else {
                 this.getPlayerData(playerName)
                     .subscribe(data => {
                         this.playerData[playerName] = data;
-                        resolve(data); 
+                        resolve(data);
                     });
             }
-        }); 
+        });
     }
 
     /**
@@ -183,7 +183,7 @@ export class PlayerDataStore{
 
 
             this.playerData[playerName] = newPlayer;
-            
+
             return newPlayer;
         });
      }
@@ -194,7 +194,7 @@ export class PlayerDataStore{
         }
         console.log('============================');
     }
-    
+
     testLogPlayerNamesKey(valueKey: string){
         for (let i = 0; i < this.playerNames[valueKey].length; i++){
             console.log(`player at ${i}: ${this.playerNames[valueKey][i]}`);

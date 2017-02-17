@@ -57,11 +57,11 @@ export class DataTableComponent implements OnInit{
     headerClick(headerText: string){
         this.headerClickEmitter.emit(headerText);
     }
-    
+
     /**
     * sets the currentData to the data provided, and creates the relevant columns for that data
     * @param data should be an array of objects
-    */ 
+    */
     updateData(data: any[]){
         this.currentData = data;
         this.currentCols = this.getColumnsFromData(data);
@@ -77,8 +77,8 @@ export class DataTableComponent implements OnInit{
             let thisDataItem = data[i];
             for (let key in thisDataItem){
                 validKeys[key] = true;
-            }  
+            }
         }
-        return Object.keys(validKeys); 
+        return Object.keys(validKeys);
     }
 }

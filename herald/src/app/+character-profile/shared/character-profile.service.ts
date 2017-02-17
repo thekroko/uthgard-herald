@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class CharacterProfileService {
-  
+
   private USE_MOCK_DATA = false;
   private API_URL = 'https://uthgard.org/herald/api/players';
 

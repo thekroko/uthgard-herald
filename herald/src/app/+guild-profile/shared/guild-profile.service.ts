@@ -38,7 +38,7 @@ export class GuildProfileService {
                       return new GuildProfile(
                         foundGuild.name,
                         foundGuild.guildContact,
-                        foundGuild.guildWebsite, 
+                        foundGuild.guildWebsite,
                         foundGuild.guildHouse,
                         foundGuild.guildRealmPoints,
                         foundGuild.players,

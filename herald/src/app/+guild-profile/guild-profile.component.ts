@@ -45,7 +45,7 @@ export class GuildProfileComponent implements OnInit{
   ];
 
   //used to store, sort, and retrieve player data
-  playerDataStore: PlayerDataStore = new PlayerDataStore(this.http);  
+  playerDataStore: PlayerDataStore = new PlayerDataStore(this.http);
 
   constructor(private route: ActivatedRoute,
               private guildProfileService: GuildProfileService,
@@ -80,8 +80,8 @@ export class GuildProfileComponent implements OnInit{
   handlePlayerTableHeaderClick(headerText: string){
     this.playerDataStore.sortPlayersForValue(headerText)
         .then(() => {
-            this.setSortColumn(headerText); 
-            
+            this.setSortColumn(headerText);
+
             let reversed = this.currentSortColumn[0] === '-';
 
             this.playerDataStore.getPlayerRange(this.currentIterator, this.currentIterator + this.pageSize, reversed).then(
@@ -90,12 +90,12 @@ export class GuildProfileComponent implements OnInit{
                         //TODO: reverse needs to be done at player data store level
                         returnedPlayerData.reverse();
                     };
-                    this.tableDataSubject.next(returnedPlayerData); 
+                    this.tableDataSubject.next(returnedPlayerData);
                     console.dir(this.playerDataStore.playerData);
                 }
             );
         });
-  }    
+  }
 
   /**
   * sets the sort column based on the data passed in and the current sort column
