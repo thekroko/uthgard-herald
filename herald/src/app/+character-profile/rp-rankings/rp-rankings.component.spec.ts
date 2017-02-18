@@ -1,13 +1,68 @@
 /* tslint:disable:no-unused-variable */
-
-import { By }           from '@angular/platform-browser';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { addProviders, async, inject } from '@angular/core/testing';
-import { RpRankingsComponent } from './rp-rankings.component';
 
-describe('Component: RpRankings', () => {
-  it('should create an instance', () => {
-    let component = new RpRankingsComponent();
+import { RpRankingsComponent } from './rp-rankings.component';
+import {CharacterProfile} from '../shared/character-profile.model';
+import {mockPlayerProfiles} from '../shared/mock-character-profiles';
+
+describe('RpRankingsComponent', () => {
+  let component: RpRankingsComponent;
+  let fixture: ComponentFixture<RpRankingsComponent>;
+  let character: CharacterProfile;
+  let canvas: HTMLCanvasElement[];
+  let emptyCanvasCode: string[];
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ RpRankingsComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(RpRankingsComponent);
+    component = fixture.componentInstance;
+    canvas = [];
+    emptyCanvasCode = [];
+
+    for (let eleDebug of fixture.debugElement.queryAll(By.css('canvas')))
+    {
+      let eleCanvas: HTMLCanvasElement = eleDebug.nativeElement;
+      canvas.push(eleCanvas);
+      emptyCanvasCode.push(eleCanvas.toDataURL());
+    }
+
+    //provide mock character
+    character = mockPlayerProfiles[0];
+    component.character = character;
+
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have something drawn on the 1st canvas', () => {
+    let canvasCode: string = canvas[0].toDataURL();
+    expect(canvasCode === emptyCanvasCode[0]).toBe(false);
+  });
+
+  it('should have something drawn on the 2nd canvas', () => {
+    let canvasCode: string = canvas[1].toDataURL();
+    expect(canvasCode === emptyCanvasCode[1]).toBe(false);
+  });
+
+  it('should have something drawn on the 3rd canvas', () => {
+    let canvasCode: string = canvas[2].toDataURL();
+    expect(canvasCode === emptyCanvasCode[2]).toBe(false);
+  });
+
+  it('should have something drawn on the 4th canvas', () => {
+    let canvasCode: string = canvas[3].toDataURL();
+    expect(canvasCode === emptyCanvasCode[3]).toBe(false);
+  });
+
 });

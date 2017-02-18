@@ -1,20 +1,36 @@
 /* tslint:disable:no-unused-variable */
-
-import { By }           from '@angular/platform-browser';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import {
-  beforeEach, beforeEachProviders,
-  describe, xdescribe,
-  expect, it, xit,
-  async, inject
-} from '@angular/core/testing';
-
 import { SiegeStatsComponent } from './siege-stats.component';
+import {CharacterProfile} from '../shared/character-profile.model';
+import {mockPlayerProfiles} from '../shared/mock-character-profiles';
 
-describe('Component: SiegeStats', () => {
-  it('should create an instance', () => {
-    let component = new SiegeStatsComponent();
+describe('SiegeStatsComponent', () => {
+  let component: SiegeStatsComponent;
+  let fixture: ComponentFixture<SiegeStatsComponent>;
+  let character: CharacterProfile;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ SiegeStatsComponent ]
+    })
+      .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SiegeStatsComponent);
+    component = fixture.componentInstance;
+
+    //provide mock character
+    character = mockPlayerProfiles[0];
+    component.character = character;
+
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

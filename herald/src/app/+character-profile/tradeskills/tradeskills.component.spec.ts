@@ -1,13 +1,36 @@
 /* tslint:disable:no-unused-variable */
-
-import { By }           from '@angular/platform-browser';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { addProviders, async, inject } from '@angular/core/testing';
-import { TradeskillsComponent } from './tradeskills.component';
 
-describe('Component: Tradeskills', () => {
-  it('should create an instance', () => {
-    let component = new TradeskillsComponent();
+import { TradeskillsComponent } from './tradeskills.component';
+import {CharacterProfile} from '../shared/character-profile.model';
+import {mockPlayerProfiles} from '../shared/mock-character-profiles';
+
+describe('TradeskillsComponent', () => {
+  let component: TradeskillsComponent;
+  let fixture: ComponentFixture<TradeskillsComponent>;
+  let character: CharacterProfile;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ TradeskillsComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TradeskillsComponent);
+    component = fixture.componentInstance;
+
+    //provide mock character
+    character = mockPlayerProfiles[0];
+    component.character = character;
+
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
