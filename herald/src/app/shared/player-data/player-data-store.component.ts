@@ -1,6 +1,5 @@
 import {SmallPlayerData} from './small-player-data';
-import {Http} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import {SmallPlayerDataService} from '../small-player-data.service';
 
 export class PlayerDataStore {
 
@@ -9,10 +8,10 @@ export class PlayerDataStore {
     public currentColumnSort: string; //alphabetical as default sort
 
     /**
-    * @param http         the http service which will be used to fetch character data
+    * @param smallPlayerDataService The service
     * @param presumedSort the column which will be the presumed sort by default
     */
-    constructor(private http: Http, presumedSort: string = 'alpha') {
+    constructor(private smallPlayerDataService: SmallPlayerDataService, presumedSort: string = 'alpha') {
         //this.playerNames['unsorted'] = [];
         //this.playerNames['alpha'] = []; //to ensure we always have an alpha sorted list
         this.initDefaultPlayerDataStoreValues();
@@ -39,7 +38,7 @@ export class PlayerDataStore {
     * returns players data from the current sort between the values specified
     * @param startIndex the index from which to start
     * @param endIndex   the index at which to end
-    * @param reversed   do we want to work from the end of the list?
+    * @param reverse   do we want to work from the end of the list?
     * @returns          a promise of an array of SmallPlayerData for the range specified
     */
     getPlayerRange(startIndex: number, endIndex: number, reverse: boolean = false): Promise<SmallPlayerData[]> {
@@ -108,7 +107,7 @@ export class PlayerDataStore {
 
             for (let n = 0; n < this.playerNames['unsorted'].length; n++) {
                 let currPlayer = this.playerNames['unsorted'][n];
-                this.getPlayerData(currPlayer)
+                this.smallPlayerDataService.getPlayerData(currPlayer)
                     .subscribe(data => {
 
                         if (data[valueKey]) {
@@ -160,7 +159,7 @@ export class PlayerDataStore {
             if (this.playerData[playerName]) {
                 resolve(this.playerData[playerName]);
             } else {
-                this.getPlayerData(playerName)
+                this.smallPlayerDataService.getPlayerData(playerName)
                     .subscribe(data => {
                         this.playerData[playerName] = data;
                         resolve(data);
@@ -168,54 +167,6 @@ export class PlayerDataStore {
             }
         });
     }
-
-    /**
-    * returns an observable which outputs player data for the name given
-    * @param playerName the name of the player for which data is being reuqested
-    * @returns          an observable which will return the data for the player requested
-    */
-    getPlayerData(playerName): Observable<SmallPlayerData> {
-      //let playerUrl = `/assets/data/players/${playerName}.json`;
-
-      //return this.http.get(playerUrl)//temporary removed whilst testing against real data
-      return this.http.get(`https://uthgard.org/herald/api/player/${playerName}`)
-        .map((res) => {
-            if (res.status !== 200) {
-                throw new Error('Player not found');
-            }
-
-            let data = JSON.parse(res.text());
-            let foundPlayer = data;
-
-            /* removing temporarily for testing with live data
-            let newPlayer = new SmallPlayerData(
-                      foundPlayer.fullName,
-                      foundPlayer.raceName,
-                      foundPlayer.className,
-                      foundPlayer.level,
-                      foundPlayer.xpPercent,
-                      foundPlayer.rpPercent,
-                      foundPlayer.realmRank,
-                      foundPlayer.realm,
-                   );
-            */
-
-            let newPlayer = new SmallPlayerData(
-                      foundPlayer.Name,
-                      foundPlayer.Race,
-                      foundPlayer.Class,
-                      foundPlayer.Level,
-                      foundPlayer.XpPercentOfLevel,
-                      foundPlayer.RpPercentOfLevel,
-                      foundPlayer.Rp,
-                      foundPlayer.Realm,
-                   );
-
-            this.playerData[playerName] = newPlayer;
-
-            return newPlayer;
-        });
-     }
 
     testLogPlayerNamesAlpha() {
         for (let i = 0; i < this.playerNames['alpha'].length; i++) {

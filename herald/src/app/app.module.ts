@@ -12,6 +12,8 @@ import {CharacterProfileService} from './+character-profile';
 import {DataTableComponent} from './shared/data-table/data-table.component';
 import {GuildProfileService} from './+guild-profile/shared/guild-profile.service';
 import {HomeComponent} from './+home';
+import {SmallPlayerDataService} from './shared/small-player-data.service';
+import {PlayerSearchService} from './shared/player-search.service';
 
 @NgModule({
   imports: [BrowserModule, routing, HttpModule],       // module dependencies
@@ -32,6 +34,8 @@ import {HomeComponent} from './+home';
   bootstrap: [AppComponent],     // root component
   providers: [CharacterProfileService, // services
     GuildProfileService,
+    SmallPlayerDataService,
+    PlayerSearchService,
   ]
 })
 export class AppModule { }

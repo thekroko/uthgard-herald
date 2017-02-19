@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Http} from '@angular/http';
-
 import {Subject} from 'rxjs/Rx';
 import {PlayerDataStore} from '../shared/player-data/player-data-store.component';
+import {SmallPlayerDataService} from '../shared/small-player-data.service';
+import {PlayerSearchService} from '../shared/player-search.service';
 
 @Component({
   templateUrl: './home.component.html',
@@ -14,11 +14,12 @@ export class HomeComponent implements OnInit {
   maxSearchResults: number = 50;
   searchDataSubject: Subject<any> = new Subject<any>(); //to provide data to the player search table
 
-  constructor(private http: Http) {
+  constructor(private playerSearchService: PlayerSearchService,
+              private smallPlayerDataService: SmallPlayerDataService) {
   }
 
   ngOnInit() {
-    this.playerSearchResults = new PlayerDataStore(this.http);
+    this.playerSearchResults = new PlayerDataStore(this.smallPlayerDataService);
   }
 
   /**
@@ -26,26 +27,17 @@ export class HomeComponent implements OnInit {
   * @param value the player which is being searched for
   */
   doPlayerSearch(value: string) {
-    this.http.get(`https://uthgard.org/herald/api/search/player/${value}`)
-        .map((res) => {
-            if (res.status !== 200) {
-                throw new Error('Player not found');
-            }
+    this.playerSearchService.doPlayerSearch(value)
+      .subscribe((data: string[]) => {
+          this.playerSearchResults.clearAllData(); //we don't want old search results
 
-            let data = JSON.parse(res.text());
-
-            return data;
-        })
-        .subscribe((data: string[]) => {
-            this.playerSearchResults.clearAllData(); //we don't want old search results
-
-            this.playerSearchResults.addPlayers(data);
-            this.playerSearchResults.getPlayerRange(0, this.maxSearchResults)
-                .then((fullPlayerData) => {
-                    console.dir(fullPlayerData);
-                    this.searchDataSubject.next(fullPlayerData);
-                });
-        });
+          this.playerSearchResults.addPlayers(data);
+          this.playerSearchResults.getPlayerRange(0, this.maxSearchResults)
+              .then((fullPlayerData) => {
+                  console.dir(fullPlayerData);
+                  this.searchDataSubject.next(fullPlayerData);
+              });
+      });
   }
 
 }

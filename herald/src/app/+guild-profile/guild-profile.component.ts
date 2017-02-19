@@ -1,17 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-
 import {ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs/Rx';
 import {ISubscription} from 'rxjs/Subscription';
-
-import {Http} from '@angular/http';
-
 import {GuildProfileService} from './shared/guild-profile.service';
 import {GuildProfile} from './shared/guild.model';
-
 import {PlayerDataStore} from '../shared/player-data/player-data-store.component';
-
 import {SmallPlayerData} from '../shared/player-data/small-player-data';
+import {SmallPlayerDataService} from '../shared/small-player-data.service';
 
 @Component({
   selector: 'herald-guild-profile',
@@ -45,11 +40,11 @@ export class GuildProfileComponent implements OnInit {
   ];
 
   //used to store, sort, and retrieve player data
-  playerDataStore: PlayerDataStore = new PlayerDataStore(this.http);
+  playerDataStore: PlayerDataStore = new PlayerDataStore(this.smallPlayerDataService);
 
   constructor(private route: ActivatedRoute,
               private guildProfileService: GuildProfileService,
-              private http: Http) {
+              private smallPlayerDataService: SmallPlayerDataService) {
   }
 
 
