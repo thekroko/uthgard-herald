@@ -25,15 +25,15 @@ export class HomeComponent implements OnInit {
   * does a search for players with the value provided
   * @param value the player which is being searched for
   */
-  doPlayerSearch(value: string){
+  doPlayerSearch(value: string) {
     this.http.get(`https://uthgard.org/herald/api/search/player/${value}`)
         .map((res) => {
-            if (res.status !== 200){
+            if (res.status !== 200) {
                 throw new Error('Player not found');
             }
 
             let data = JSON.parse(res.text());
-            
+
             return data;
         })
         .subscribe((data: string[]) => {

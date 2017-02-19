@@ -12,7 +12,7 @@ export class PlayerDataStore {
     * @param http         the http service which will be used to fetch character data
     * @param presumedSort the column which will be the presumed sort by default
     */
-    constructor(private http:Http, presumedSort: string = 'alpha') {
+    constructor(private http: Http, presumedSort: string = 'alpha') {
         //this.playerNames['unsorted'] = [];
         //this.playerNames['alpha'] = []; //to ensure we always have an alpha sorted list
         this.initDefaultPlayerDataStoreValues();
@@ -22,7 +22,7 @@ export class PlayerDataStore {
     /**
     * clears the player data currently being stored
     */
-    clearAllData(){
+    clearAllData() {
         this.initDefaultPlayerDataStoreValues();
         this.currentColumnSort = 'unsorted';
     }
@@ -30,7 +30,7 @@ export class PlayerDataStore {
     /**
     * ensures the playerData and playerNames properties are initialised properly
     */
-    initDefaultPlayerDataStoreValues(){
+    initDefaultPlayerDataStoreValues() {
         this.playerData = [];
         this.playerNames = {unsorted: [], alpha: []};
     }
