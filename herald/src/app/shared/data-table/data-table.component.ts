@@ -11,10 +11,10 @@ export class DataTableComponent implements OnInit {
     dataListener: Subject<any>; //listens for data coming in
 
     @Input()
-    headerConversions: {keyName: string, displayName: string}[]; //converts the format of headers
+    headerConversions: {keyName: string, displayName: string}[] = [{keyName: '', displayName: ''}]; //converts the format of headers
 
     @Input()
-    hiddenColumns: string[]; //used to hide particular columns
+    hiddenColumns: string[] = []; //used to hide particular columns
 
     @Output()
     headerClickEmitter: EventEmitter<string> = new EventEmitter<string>(); //sends events when headers are clicked

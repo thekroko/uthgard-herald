@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 export class PlayerDataStore {
 
     public playerData: SmallPlayerData[] = []; //the data for the players, indexed against their names
-    public playerNames: string[] = []; //as column_name: [list of player names sorted by that] (including an unsorted)
+    public playerNames: any  = {}; //as column_name: [list of player names sorted by that] (including an unsorted)
     public currentColumnSort: string; //alphabetical as default sort
 
     /**
@@ -13,9 +13,26 @@ export class PlayerDataStore {
     * @param presumedSort the column which will be the presumed sort by default
     */
     constructor(private http: Http, presumedSort: string = 'alpha') {
-        this.playerNames['unsorted'] = [];
-        this.playerNames['alpha'] = []; //to ensure we always have an alpha sorted list
+        //this.playerNames['unsorted'] = [];
+        //this.playerNames['alpha'] = []; //to ensure we always have an alpha sorted list
+        this.initDefaultPlayerDataStoreValues();
         this.currentColumnSort = presumedSort;
+    }
+
+    /**
+    * clears the player data currently being stored
+    */
+    clearAllData() {
+        this.initDefaultPlayerDataStoreValues();
+        this.currentColumnSort = 'unsorted';
+    }
+
+    /**
+    * ensures the playerData and playerNames properties are initialised properly
+    */
+    initDefaultPlayerDataStoreValues() {
+        this.playerData = [];
+        this.playerNames = {unsorted: [], alpha: []};
     }
 
     /**
@@ -158,9 +175,10 @@ export class PlayerDataStore {
     * @returns          an observable which will return the data for the player requested
     */
     getPlayerData(playerName): Observable<SmallPlayerData> {
-      let playerUrl = `/assets/data/players/${playerName}.json`;
+      //let playerUrl = `/assets/data/players/${playerName}.json`;
 
-      return this.http.get(playerUrl)
+      //return this.http.get(playerUrl)//temporary removed whilst testing against real data
+      return this.http.get(`https://uthgard.org/herald/api/player/${playerName}`)
         .map((res) => {
             if (res.status !== 200) {
                 throw new Error('Player not found');
@@ -169,6 +187,7 @@ export class PlayerDataStore {
             let data = JSON.parse(res.text());
             let foundPlayer = data;
 
+            /* removing temporarily for testing with live data
             let newPlayer = new SmallPlayerData(
                       foundPlayer.fullName,
                       foundPlayer.raceName,
@@ -179,7 +198,18 @@ export class PlayerDataStore {
                       foundPlayer.realmRank,
                       foundPlayer.realm,
                    );
+            */
 
+            let newPlayer = new SmallPlayerData(
+                      foundPlayer.Name,
+                      foundPlayer.Race,
+                      foundPlayer.Class,
+                      foundPlayer.Level,
+                      foundPlayer.XpPercentOfLevel,
+                      foundPlayer.RpPercentOfLevel,
+                      foundPlayer.Rp,
+                      foundPlayer.Realm,
+                   );
 
             this.playerData[playerName] = newPlayer;
 
