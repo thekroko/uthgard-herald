@@ -3,13 +3,14 @@ import {Http, Response} from '@angular/http';
 import {CharacterProfile} from './character-profile.model';
 import {Realm} from '../../shared/realm.enum';
 import {mockPlayerProfiles} from './mock-character-profiles';
+import {ApiUrlConstants} from '../../shared/api-url-constants';
 import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class CharacterProfileService {
 
   private USE_MOCK_DATA = false;
-  private API_URL = 'https://uthgard.org/herald/api/player/';
+  private API_URL = ApiUrlConstants.Player;
 
   constructor(private http: Http) {
     if (isDevMode()) {
