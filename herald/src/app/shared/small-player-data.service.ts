@@ -18,7 +18,7 @@ export class SmallPlayerDataService {
    */
   getPlayerData(playerName: string): Observable<SmallPlayerData> {
     if (!isDevMode()) {
-      this.getPlayerFromUthgardApi(playerName);
+      return this.getPlayerFromUthgardApi(playerName);
     }
 
     if (this.UseMockData) {
