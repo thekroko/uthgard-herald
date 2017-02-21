@@ -25,7 +25,8 @@ export class SmallPlayerDataService {
       return this.getPlayerFromMockData();
     }
 
-    return this.getPlayerFromInternalApi(playerName);
+    //return this.getPlayerFromInternalApi(playerName);
+    return this.getPlayerFromUthgardApi(playerName);
   }
 
   /**
@@ -44,10 +45,12 @@ export class SmallPlayerDataService {
    * @param playerName the name of the player for which data is being requested
    * @returns {Observable<SmallPlayerData>}
    */
+/*
   private getPlayerFromInternalApi(playerName: string): Observable<SmallPlayerData> {
     let url =  `/assets/data/players/${playerName}.json`;
     return this.getPlayerFromUrl(url);
   }
+*/
 
   /**
    * Gets SmallPlayerData from a URL endpoint

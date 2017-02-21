@@ -16,6 +16,9 @@ export class DataTableComponent implements OnInit {
     @Input()
     hiddenColumns: string[] = []; //used to hide particular columns
 
+    @Input()
+    linkColumns: {keyName: string, urlPrefix: string}[] = [{keyName: '', urlPrefix: ''}]; //sets up columns which will have links
+
     @Output()
     headerClickEmitter: EventEmitter<string> = new EventEmitter<string>(); //sends events when headers are clicked
 
@@ -23,9 +26,19 @@ export class DataTableComponent implements OnInit {
     currentCols: string[] = []; //used to store the keys against which columns can be formed
 
     ngOnInit() {
+        console.dir(this.linkColumns);
         this.dataListener.subscribe((data) => {
             this.updateData(data);
         });
+    }
+
+    getHeaderLink(headerKey): string {
+        let foundWord = this.linkColumns.find((item) => {
+            console.log(`comparing ${headerKey} and ${item.keyName}`);
+            return item.keyName === headerKey;
+        });
+        console.dir(foundWord);
+        return foundWord ? foundWord.urlPrefix : '';
     }
 
     /**
