@@ -1,20 +1,50 @@
 /* tslint:disable:no-unused-variable */
-
-import { By }           from '@angular/platform-browser';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import {
-  beforeEach, beforeEachProviders,
-  describe, xdescribe,
-  expect, it, xit,
-  async, inject
-} from '@angular/core/testing';
-
 import { HomeComponent } from './home.component';
+import { DataTableComponent } from '../shared/data-table/data-table.component';
+import {Observable} from 'rxjs';
+import {PlayerSearchService} from '../shared/player-search.service';
+import {SmallPlayerDataService} from '../shared/small-player-data.service';
+import {SmallPlayerData} from '../shared/player-data/small-player-data';
 
-describe('Component: Home', () => {
-  it('should create an instance', () => {
-    let component = new HomeComponent();
+describe('HomeComponent', () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ HomeComponent, DataTableComponent ],
+      providers: [ {provide: PlayerSearchService, useClass: PlayerSearchServiceStub},
+                   {provide: SmallPlayerDataService, useClass: SmallPlayerDataServiceStub]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  //todo probably add a test for the search result
 });
+
+class PlayerSearchServiceStub {
+  doPlayerSearch(searchName: string): Observable<string[]> {
+    let mockResults = ['PlayerOne', 'PlayerTwo', searchName];
+    return Observable.of(mockResults);
+  }
+}
+
+class SmallPlayerDataServiceStub {
+  getPlayerData(playerName: string): Observable<SmallPlayerData> {
+    return Observable.of(new SmallPlayerData(playerName, 'Norseman', 'Shaman', 11, 10, 5, 3.1, 'midgard'));
+  }
+}

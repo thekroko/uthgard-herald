@@ -1,9 +1,9 @@
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
   <h3 class="gothic">Race • Class Kills</h3>
-  <canvas [class.hide]="activeBtn!==1" id="races-killed1" width="400px" height="400px"></canvas>
-  <canvas [class.hide]="activeBtn!==2" id="races-killed2" width="400px" height="400px"></canvas>
-  <canvas [class.hide]="activeBtn!==3" id="classes-killed1" width="400px" height="400px"></canvas>
-  <canvas [class.hide]="activeBtn!==4" id="classes-killed2" width="400px" height="400px"></canvas>
+  <canvas [class.hide]="activeBtn!==1" #racesKilled1 width="400px" height="400px"></canvas>
+  <canvas [class.hide]="activeBtn!==2" #racesKilled2 width="400px" height="400px"></canvas>
+  <canvas [class.hide]="activeBtn!==3" #classesKilled1 width="400px" height="400px"></canvas>
+  <canvas [class.hide]="activeBtn!==4" #classesKilled2 width="400px" height="400px"></canvas>
   <div class="row tabs">
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       <a href="javascript:;" (click)="selectTab($event, 1)">

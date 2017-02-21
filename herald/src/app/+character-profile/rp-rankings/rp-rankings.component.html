@@ -1,9 +1,9 @@
 <div id="rp-rankings" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
   <h3 class="gothic">RP Rankings</h3>
-  <canvas [class.hide]="activeBtn!==1" id="weekly-rp-canvas" width="400" height="400"></canvas>
-  <canvas [class.hide]="activeBtn!==2" id="yearly-rp-canvas" width="400" height="400"></canvas>
-  <canvas [class.hide]="activeBtn!==3" id="weekly-rank-canvas" width="400" height="400"></canvas>
-  <canvas [class.hide]="activeBtn!==4" id="overall-rank-canvas" width="400" height="400"></canvas>
+  <canvas [class.hide]="activeBtn!==1" #weeklyRPCanvas width="400" height="400"></canvas>
+  <canvas [class.hide]="activeBtn!==2" #yearlyRPCanvas width="400" height="400"></canvas>
+  <canvas [class.hide]="activeBtn!==3" #weeklyRankCanvas width="400" height="400"></canvas>
+  <canvas [class.hide]="activeBtn!==4" #overallRankCanvas width="400" height="400"></canvas>
   <div id="rankings" class="row tabs">
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       <a href="javascript:;" (click)="selectTab($event, 1)">

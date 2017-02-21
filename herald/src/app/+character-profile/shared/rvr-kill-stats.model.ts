@@ -2,15 +2,15 @@
  * Class to hold the RvR kill statistics of a character
  */
 export class RvrKillStats {
-  constructor(public albKills: number,
-              public hibKills: number,
-              public midKills: number,
-              public deathblows: number,
-              public soloKills: number,
-              public killedMostNumKills: number,
-              public killedMostName: string,
-              public killedByMostNumKills: number,
-              public killedByMostName: string) {
+  constructor(public albKills: number = 0,
+              public hibKills: number = 0,
+              public midKills: number = 0,
+              public deathblows: number = 0,
+              public soloKills: number = 0,
+              public killedMostNumKills: number = 0,
+              public killedMostName: string = '',
+              public killedByMostNumKills: number = 0,
+              public killedByMostName: string = '') {
   };
 
   /**

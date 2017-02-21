@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, AfterContentInit, ViewChild} from '@angular/core';
 import {CharacterProfile} from '../shared/character-profile.model';
 
 const Chart = require('chart.js');
@@ -11,9 +11,15 @@ import {Realm} from '../../shared/realm.enum';
   styleUrls: ['../character-profile.component.css',
     './race-class-kills.component.css']
 })
-export class RaceClassKillsComponent implements OnInit {
+export class RaceClassKillsComponent implements AfterContentInit {
   @Input()
   character: CharacterProfile;
+
+  @ViewChild('racesKilled1') racesKilled1;
+  @ViewChild('racesKilled2') racesKilled2;
+  @ViewChild('classesKilled1') classesKilled1;
+  @ViewChild('classesKilled2') classesKilled2;
+
   realm1: string;
   realm2: string;
   activeBtn: number = 1;
@@ -21,7 +27,7 @@ export class RaceClassKillsComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit() {
+  ngAfterContentInit() {
     const raceLabels = {
       'albion': ['Briton', 'Saracen', 'Highlander', 'Avalonian', 'Inconnu'],
       'hibernia': ['Celt', 'Lurikeen', 'Firbolg', 'Elf', 'Sylvan'],
@@ -85,7 +91,7 @@ export class RaceClassKillsComponent implements OnInit {
         classesData[1] = this.character.midClassKills;
     }
 
-    new Chart(document.getElementById('races-killed1'), {
+    new Chart(this.racesKilled1.nativeElement, {
       type: 'bar',
       data: {
         labels: raceLabels[this.realm1],
@@ -99,7 +105,7 @@ export class RaceClassKillsComponent implements OnInit {
       }
     });
 
-    new Chart(document.getElementById('races-killed2'), {
+    new Chart(this.racesKilled2.nativeElement, {
       type: 'bar',
       data: {
         labels: raceLabels[this.realm2],
@@ -113,7 +119,7 @@ export class RaceClassKillsComponent implements OnInit {
       }
     });
 
-    new Chart(document.getElementById('classes-killed1'), {
+    new Chart(this.classesKilled1.nativeElement, {
       type: 'bar',
       data: {
         labels: classLabels[this.realm1],
@@ -127,7 +133,7 @@ export class RaceClassKillsComponent implements OnInit {
       }
     });
 
-    new Chart(document.getElementById('classes-killed2'), {
+    new Chart(this.classesKilled2.nativeElement, {
       type: 'bar',
       data: {
         labels: classLabels[this.realm2],

@@ -1,0 +1,18 @@
+<div class="data-table-inner">
+    <table class="table">
+      <thead>
+        <tr class="data-table-header">
+            <ng-container *ngFor="let data of currentCols">
+                <th *ngIf="!columnIsHidden(data)" (click)="headerClick(data)">{{ convertHeader(data) }}</th> 
+            </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of currentData" class="data-table-row">
+            <ng-container *ngFor="let key of currentCols">
+                <td *ngIf="!columnIsHidden(key)">{{ data[key] }}</td> 
+            </ng-container>
+        </tr>
+      </tbody>
+    </table>
+</div>

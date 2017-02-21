@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, AfterContentInit, ViewChild} from '@angular/core';
 import {CharacterProfile} from '../shared/character-profile.model';
 import {Realm} from '../../shared/realm.enum';
 import {RvrKillStats} from '../shared/rvr-kill-stats.model';
@@ -11,14 +11,15 @@ const Chart = require('chart.js');
   styleUrls: ['../character-profile.component.css',
     './rvr-kills.component.css']
 })
-export class RvrKillsComponent implements OnInit {
+export class RvrKillsComponent implements AfterContentInit {
   @Input()
   character: CharacterProfile;
+  @ViewChild('killStats') killStats;
 
   constructor() {
   }
 
-  ngOnInit() {
+  ngAfterContentInit() {
     let labels: string[];
     let data: number[];
     const stats: RvrKillStats = this.character.rvrStats;
@@ -39,7 +40,7 @@ export class RvrKillsComponent implements OnInit {
     }
 
 
-    let killStatsCanvas = document.getElementById('kill-stats');
+    let killStatsCanvas = this.killStats.nativeElement;
     new Chart(killStatsCanvas, {
       type: 'bar',
       data: {
