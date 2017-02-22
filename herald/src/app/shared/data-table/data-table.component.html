@@ -10,7 +10,14 @@
       <tbody>
         <tr *ngFor="let data of currentData" class="data-table-row">
             <ng-container *ngFor="let key of currentCols">
-                <td *ngIf="!columnIsHidden(key)">{{ data[key] }}</td> 
+                <td *ngIf="!columnIsHidden(key)">
+                 <div *ngIf="getHeaderLink(key) === ''" class="link-wrapper">
+                    {{ data[key] }}
+                 </div>
+                 <div *ngIf="getHeaderLink(key) !== ''"  class="link-wrapper">
+                    <a href="{{ getHeaderLink(key) + data[key] }}">{{ data[key] }}</a>
+                 </div>
+                </td> 
             </ng-container>
         </tr>
       </tbody>

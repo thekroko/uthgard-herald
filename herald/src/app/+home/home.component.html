@@ -9,7 +9,7 @@
 <div class="row">
  <div class="col-lg-6">
       <div class="input-group">
-        <input #search type="text" class="form-control" placeholder="Search for...">
+        <input #search type="text" class="form-control" (keyup.enter)="doPlayerSearch(search.value)" placeholder="Search for...">
         <span class="input-group-btn">
           <button (click)="doPlayerSearch(search.value)" class="btn btn-secondary" type="button"><span class="glyphicon glyphicon-search" id="search-button"></span></button>
         </span>
@@ -19,6 +19,6 @@
 
 <div class="row">
  <div class="col-xs-12 col-md-6 search-results-holder">
-    <herald-data-table [dataListener]="searchDataSubject"></herald-data-table>
+    <herald-data-table [dataListener]="searchDataSubject" [headerConversions]="playerSearchTableHeaders" [linkColumns]="playerSearchLinkColumns" [hiddenColumns]="searchTableHiddenColumns"></herald-data-table>
  </div>
 </div>
