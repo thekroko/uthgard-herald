@@ -7,18 +7,21 @@
 </p>
 
 <div class="row">
- <div class="col-lg-6">
-      <div class="input-group">
+ <div class="col-sm-12 col-md-6 col-md-offset-3 search-wrapper">
+  <h3 class="section-header">Search for a <span class="interactive search-type-label" (click)="toggleCurrentSearchType()">{{this.currentSearchType}}</span><span class="glyphicon glyphicon-chevron-down search-type-chevron interactive" (click)="toggleCurrentSearchType()"></span></h3>
+      <div class="input-group search-input-group">
         <input #search type="text" class="form-control" (keyup.enter)="doPlayerSearch(search.value)" placeholder="Search for...">
         <span class="input-group-btn">
-          <button (click)="doPlayerSearch(search.value)" class="btn btn-secondary" type="button"><span class="glyphicon glyphicon-search" id="search-button"></span></button>
+          <button (click)="doCurrentSearch(search.value)" class="btn btn-secondary" type="button"><span class="glyphicon glyphicon-search" id="search-button"></span></button>
         </span>
-    </div>
+      </div>
+    
   </div>
 </div>
 
 <div class="row">
- <div class="col-xs-12 col-md-6 search-results-holder">
-    <herald-data-table [dataListener]="searchDataSubject" [headerConversions]="playerSearchTableHeaders" [linkColumns]="playerSearchLinkColumns" [hiddenColumns]="searchTableHiddenColumns"></herald-data-table>
+ <div class="col-xs-12 col-md-6 col-md-offset-3 search-results-holder">
+    <herald-data-table *ngIf="currentSearchType === 'player'" [dataListener]="playerSearchDataSubject" [headerConversions]="playerSearchTableHeaders" [linkColumns]="playerSearchLinkColumns" [hiddenColumns]="playerSearchTableHiddenColumns"></herald-data-table>
+    <herald-data-table *ngIf="currentSearchType === 'guild'" [dataListener]="guildSearchDataSubject" [headerConversions]="guildSearchTableHeaders" [linkColumns]="guildSearchLinkColumns" [hiddenColumns]="guildTableHiddenColumns"></herald-data-table>
  </div>
 </div>

@@ -22,8 +22,9 @@ export class GuildProfileService {
   }
 
   private getGuildProfileFromFile(name: string) {
+    console.log('making call from guild profile service for ' + name);
     let fileName = name.replace(/ /g, '-');
-    return this.http.get(`/assets/data/guilds/${fileName}.json`)
+    return this.http.get(`https://www2.uthgard.net/herald/api/guild/${fileName}`)
                     .map((res) => {
 
                       if (res.status !== 200) {

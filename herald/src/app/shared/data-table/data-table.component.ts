@@ -34,10 +34,8 @@ export class DataTableComponent implements OnInit {
 
     getHeaderLink(headerKey): string {
         let foundWord = this.linkColumns.find((item) => {
-            console.log(`comparing ${headerKey} and ${item.keyName}`);
             return item.keyName === headerKey;
         });
-        console.dir(foundWord);
         return foundWord ? foundWord.urlPrefix : '';
     }
 
@@ -59,8 +57,12 @@ export class DataTableComponent implements OnInit {
     * @returns       whether or not the column is hidden
     */
     columnIsHidden(keyName: string): boolean {
-        let foundKey =  this.hiddenColumns.indexOf(keyName);
-        return foundKey !== -1;
+        if (this.hiddenColumns){
+            let foundKey =  this.hiddenColumns.indexOf(keyName);
+            return foundKey !== -1;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -85,6 +87,8 @@ export class DataTableComponent implements OnInit {
     * @param data should be an array of objects
     */
     getColumnsFromData(data: any[]) {
+        console.log('attempting to find columns from data:');
+        console.dir(data);
         let validKeys = {};
         for (let i = 0; i < data.length; i++) {
             let thisDataItem = data[i];
@@ -94,6 +98,8 @@ export class DataTableComponent implements OnInit {
                 }
             }
         }
+        console.log('valid keys');
+        console.dir(Object.keys(validKeys));
         return Object.keys(validKeys);
     }
 }
