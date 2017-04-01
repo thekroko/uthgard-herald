@@ -5,7 +5,7 @@ import {SmallPlayerDataService} from '../shared/small-player-data.service';
 import {PlayerSearchService} from '../shared/player-search.service';
 import {GuildSearchService} from '../shared/guild-search.service';
 
-declare var $:any;
+declare var $: any;
 
 @Component({
   templateUrl: './home.component.html',
@@ -68,14 +68,14 @@ export class HomeComponent implements OnInit {
         $(this).toggleClass('rotated');
     });
     $('.search-type-label').click(function(){
-        $(this).siblings('.search-type-chevron').toggleClass('rotated'); 
-    }); 
+        $(this).siblings('.search-type-chevron').toggleClass('rotated');
+    });
   }
 
   /**
   * toggles the state of the current search type
   */
-  toggleCurrentSearchType(){
+  toggleCurrentSearchType() {
     this.currentSearchType = this.currentSearchType === 'player' ? 'guild' : 'player';
   }
 
@@ -83,10 +83,10 @@ export class HomeComponent implements OnInit {
   * does the appropriate search for the current search state
   * @param value the value for which the search is to be conducted
   */
-  doCurrentSearch(value: string){
-    if (this.currentSearchType === 'player'){
+  doCurrentSearch(value: string) {
+    if (this.currentSearchType === 'player') {
         this.doPlayerSearch(value);
-    } else if (this.currentSearchType === 'guild'){
+    } else if (this.currentSearchType === 'guild') {
         this.doGuildSearch(value);
     }
   }
@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
   * does a search for guilds and loads them into the search results table
   * @param value the guild which is being searched for
   */
-  doGuildSearch(value: string){
+  doGuildSearch(value: string) {
     console.log('doing a guild search for ' + value); //TODO: implement this properly
     this.guildSearchService.doGuildSearch(value)
         .subscribe((data) => {
@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
             //limit the number of results
             //get the guild data for each of these results
             //pass this data to guildSearchDataSubject
-            for (let i = 0; i < data.length; i++){
+            for (let i = 0; i < data.length; i++) {
                 let currGuildName = data[i];
                 guilds.push({name: currGuildName}) ;
             }

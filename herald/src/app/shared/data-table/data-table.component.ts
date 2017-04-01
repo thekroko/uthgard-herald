@@ -57,7 +57,7 @@ export class DataTableComponent implements OnInit {
     * @returns       whether or not the column is hidden
     */
     columnIsHidden(keyName: string): boolean {
-        if (this.hiddenColumns){
+        if (this.hiddenColumns) {
             let foundKey =  this.hiddenColumns.indexOf(keyName);
             return foundKey !== -1;
         } else {
