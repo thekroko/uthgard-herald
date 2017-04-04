@@ -7,7 +7,7 @@ import { HomeComponent } from './home.component';
 import { DataTableComponent } from '../shared/data-table/data-table.component';
 import {Observable} from 'rxjs';
 import {PlayerSearchService} from '../shared/player-search.service';
-import {GuildSearchService} from '../shared/player-search.service';
+import {GuildSearchService} from '../shared/guild-search.service';
 import {SmallPlayerDataService} from '../shared/small-player-data.service';
 import {SmallPlayerData} from '../shared/player-data/small-player-data';
 
