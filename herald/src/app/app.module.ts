@@ -14,6 +14,7 @@ import {GuildProfileService} from './+guild-profile/shared/guild-profile.service
 import {HomeComponent} from './+home';
 import {SmallPlayerDataService} from './shared/small-player-data.service';
 import {PlayerSearchService} from './shared/player-search.service';
+import {GuildSearchService} from './shared/guild-search.service';
 
 @NgModule({
   imports: [BrowserModule, routing, HttpModule],       // module dependencies
@@ -36,6 +37,7 @@ import {PlayerSearchService} from './shared/player-search.service';
     GuildProfileService,
     SmallPlayerDataService,
     PlayerSearchService,
+    GuildSearchService,
   ]
 })
 export class AppModule { }

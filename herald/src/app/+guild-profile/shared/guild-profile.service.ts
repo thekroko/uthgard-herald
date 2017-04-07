@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {GuildProfile} from './guild.model';
+import {ApiUrlConstants} from './../../shared/api-url-constants';
 //import {mockGuildProfiles} from './mock-guild-profiles';
 
 import 'rxjs/add/operator/map';
@@ -22,8 +23,9 @@ export class GuildProfileService {
   }
 
   private getGuildProfileFromFile(name: string) {
+    console.log('making call from guild profile service for ' + name);
     let fileName = name.replace(/ /g, '-');
-    return this.http.get(`/assets/data/guilds/${fileName}.json`)
+    return this.http.get(`${ApiUrlConstants.Guild}/${fileName}`)
                     .map((res) => {
 
                       if (res.status !== 200) {
