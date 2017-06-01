@@ -1,7 +1,6 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { RvrKillsComponent } from './rvr-kills.component';
 import {CharacterProfile} from '../shared/character-profile.model';

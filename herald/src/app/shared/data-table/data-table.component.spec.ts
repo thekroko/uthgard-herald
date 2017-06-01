@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import {DebugElement, Component} from '@angular/core';
+import {Component} from '@angular/core';
 
 import { DataTableComponent } from './data-table.component';
 import {Subject} from 'rxjs';
