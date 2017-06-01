@@ -8,7 +8,8 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 2. Download the code.
 3. Change directory to /herald/
 4. Run npm install
-5. Run ng serve
+5. Run npm install -g @angular/cli
+6. Run ng serve
 
 ## URL routes
 * Character profiles: `/character/<name>`
